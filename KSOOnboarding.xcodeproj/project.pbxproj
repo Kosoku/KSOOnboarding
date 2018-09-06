@@ -19,7 +19,9 @@
 		07A43CFD2141B9820015F9ED /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = KSO;
 				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Kosoku Interactive, LLC.";
 			};
 			buildConfigurationList = 07A43D002141B9820015F9ED /* Build configuration list for PBXProject "KSOOnboarding" */;
 			compatibilityVersion = "Xcode 9.3";
