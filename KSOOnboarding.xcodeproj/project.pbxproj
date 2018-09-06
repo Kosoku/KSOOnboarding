@@ -18,6 +18,9 @@
 		07A43D2F2141BC570015F9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D2E2141BC570015F9ED /* main.m */; };
 		07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D082141BA280015F9ED /* KSOOnboarding.framework */; };
 		07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D082141BA280015F9ED /* KSOOnboarding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07A43D3A2141BEF20015F9ED /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D392141BEF20015F9ED /* Stanley.framework */; };
+		07A43D3C2141BEFD0015F9ED /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3B2141BEFD0015F9ED /* Stanley.framework */; };
+		07A43D3D2141BEFD0015F9ED /* Stanley.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3B2141BEFD0015F9ED /* Stanley.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */,
+				07A43D3D2141BEFD0015F9ED /* Stanley.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +65,8 @@
 		07A43D2B2141BC570015F9ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07A43D2D2141BC570015F9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07A43D2E2141BC570015F9ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		07A43D392141BEF20015F9ED /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A43D3B2141BEFD0015F9ED /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D3A2141BEF20015F9ED /* Stanley.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */,
+				07A43D3C2141BEFD0015F9ED /* Stanley.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +96,7 @@
 				07A43D0A2141BA280015F9ED /* KSOOnboarding */,
 				07A43D1E2141BC550015F9ED /* Demo-iOS */,
 				07A43D092141BA280015F9ED /* Products */,
+				07A43D382141BEF20015F9ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +151,15 @@
 				07A43D2E2141BC570015F9ED /* main.m */,
 			);
 			path = "Demo-iOS";
+			sourceTree = "<group>";
+		};
+		07A43D382141BEF20015F9ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07A43D3B2141BEFD0015F9ED /* Stanley.framework */,
+				07A43D392141BEF20015F9ED /* Stanley.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
