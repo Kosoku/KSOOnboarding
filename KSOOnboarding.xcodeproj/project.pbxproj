@@ -21,6 +21,9 @@
 		07A43D3A2141BEF20015F9ED /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D392141BEF20015F9ED /* Stanley.framework */; };
 		07A43D3C2141BEFD0015F9ED /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3B2141BEFD0015F9ED /* Stanley.framework */; };
 		07A43D3D2141BEFD0015F9ED /* Stanley.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3B2141BEFD0015F9ED /* Stanley.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07A43D402141BFC20015F9ED /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3F2141BFC20015F9ED /* Loki.framework */; };
+		07A43D422141BFC90015F9ED /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D412141BFC90015F9ED /* Loki.framework */; };
+		07A43D432141BFC90015F9ED /* Loki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D412141BFC90015F9ED /* Loki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				07A43D432141BFC90015F9ED /* Loki.framework in Embed Frameworks */,
 				07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */,
 				07A43D3D2141BEFD0015F9ED /* Stanley.framework in Embed Frameworks */,
 			);
@@ -67,6 +71,8 @@
 		07A43D2E2141BC570015F9ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		07A43D392141BEF20015F9ED /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D3B2141BEFD0015F9ED /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A43D3F2141BFC20015F9ED /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A43D412141BFC90015F9ED /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D402141BFC20015F9ED /* Loki.framework in Frameworks */,
 				07A43D3A2141BEF20015F9ED /* Stanley.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D422141BFC90015F9ED /* Loki.framework in Frameworks */,
 				07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */,
 				07A43D3C2141BEFD0015F9ED /* Stanley.framework in Frameworks */,
 			);
@@ -156,6 +164,8 @@
 		07A43D382141BEF20015F9ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07A43D412141BFC90015F9ED /* Loki.framework */,
+				07A43D3F2141BFC20015F9ED /* Loki.framework */,
 				07A43D3B2141BEFD0015F9ED /* Stanley.framework */,
 				07A43D392141BEF20015F9ED /* Stanley.framework */,
 			);
