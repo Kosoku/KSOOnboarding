@@ -16,7 +16,33 @@
 		07A43D292141BC570015F9ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A43D282141BC570015F9ED /* Assets.xcassets */; };
 		07A43D2C2141BC570015F9ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A43D2A2141BC570015F9ED /* LaunchScreen.storyboard */; };
 		07A43D2F2141BC570015F9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D2E2141BC570015F9ED /* main.m */; };
+		07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D082141BA280015F9ED /* KSOOnboarding.framework */; };
+		07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D082141BA280015F9ED /* KSOOnboarding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07A43D352141BD670015F9ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07A43CFD2141B9820015F9ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07A43D072141BA280015F9ED;
+			remoteInfo = "KSOOnboarding-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07A43D372141BD670015F9ED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		07A43D082141BA280015F9ED /* KSOOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,10 +184,12 @@
 				07A43D192141BC550015F9ED /* Sources */,
 				07A43D1A2141BC550015F9ED /* Frameworks */,
 				07A43D1B2141BC550015F9ED /* Resources */,
+				07A43D372141BD670015F9ED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				07A43D362141BD670015F9ED /* PBXTargetDependency */,
 			);
 			name = "Demo-iOS";
 			productName = "Demo-iOS";
@@ -244,6 +273,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07A43D362141BD670015F9ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07A43D072141BA280015F9ED /* KSOOnboarding-iOS */;
+			targetProxy = 07A43D352141BD670015F9ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		07A43D252141BC550015F9ED /* Main.storyboard */ = {
@@ -486,7 +523,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,7 +586,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

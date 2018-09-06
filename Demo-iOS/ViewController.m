@@ -15,6 +15,8 @@
 
 #import "ViewController.h"
 
+#import <KSOOnboarding/KSOOnboarding.h>
+
 @interface ViewController ()
 
 @end
