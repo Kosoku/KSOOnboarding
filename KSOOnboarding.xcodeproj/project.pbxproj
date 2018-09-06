@@ -24,6 +24,9 @@
 		07A43D402141BFC20015F9ED /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D3F2141BFC20015F9ED /* Loki.framework */; };
 		07A43D422141BFC90015F9ED /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D412141BFC90015F9ED /* Loki.framework */; };
 		07A43D432141BFC90015F9ED /* Loki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D412141BFC90015F9ED /* Loki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07A43D452141C02A0015F9ED /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D442141C02A0015F9ED /* KSOFontAwesomeExtensions.framework */; };
+		07A43D472141C0310015F9ED /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D462141C0310015F9ED /* KSOFontAwesomeExtensions.framework */; };
+		07A43D482141C0310015F9ED /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D462141C0310015F9ED /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,7 @@
 				07A43D432141BFC90015F9ED /* Loki.framework in Embed Frameworks */,
 				07A43D342141BD670015F9ED /* KSOOnboarding.framework in Embed Frameworks */,
 				07A43D3D2141BEFD0015F9ED /* Stanley.framework in Embed Frameworks */,
+				07A43D482141C0310015F9ED /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +77,8 @@
 		07A43D3B2141BEFD0015F9ED /* Stanley.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Stanley.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D3F2141BFC20015F9ED /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D412141BFC90015F9ED /* Loki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Loki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A43D442141C02A0015F9ED /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A43D462141C0310015F9ED /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D452141C02A0015F9ED /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				07A43D402141BFC20015F9ED /* Loki.framework in Frameworks */,
 				07A43D3A2141BEF20015F9ED /* Stanley.framework in Frameworks */,
 			);
@@ -92,6 +99,7 @@
 				07A43D422141BFC90015F9ED /* Loki.framework in Frameworks */,
 				07A43D332141BD670015F9ED /* KSOOnboarding.framework in Frameworks */,
 				07A43D3C2141BEFD0015F9ED /* Stanley.framework in Frameworks */,
+				07A43D472141C0310015F9ED /* KSOFontAwesomeExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +109,7 @@
 		07A43CFC2141B9820015F9ED = {
 			isa = PBXGroup;
 			children = (
+				07A43D462141C0310015F9ED /* KSOFontAwesomeExtensions.framework */,
 				07A43D0A2141BA280015F9ED /* KSOOnboarding */,
 				07A43D1E2141BC550015F9ED /* Demo-iOS */,
 				07A43D092141BA280015F9ED /* Products */,
@@ -164,6 +173,7 @@
 		07A43D382141BEF20015F9ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07A43D442141C02A0015F9ED /* KSOFontAwesomeExtensions.framework */,
 				07A43D412141BFC90015F9ED /* Loki.framework */,
 				07A43D3F2141BFC20015F9ED /* Loki.framework */,
 				07A43D3B2141BEFD0015F9ED /* Stanley.framework */,
