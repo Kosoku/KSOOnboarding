@@ -19,11 +19,12 @@
 #import <KSOOnboarding/KSOOnboarding.h>
 #import <Ditko/Ditko.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
+#import <Stanley/Stanley.h>
 
 static CGSize const kImageSize = {.width=128, .height=128};
 
 @interface ViewController () <KSOOnboardingViewControllerDelegate>
-
+@property (strong,nonatomic) KSOOnboardingMovieBackgroundView *backgroundView;
 @end
 
 @implementation ViewController
@@ -31,7 +32,8 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
+    self.backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
@@ -42,12 +44,7 @@ static CGSize const kImageSize = {.width=128, .height=128};
 //
 //    return retval;
     
-    KSOOnboardingMovieBackgroundView *retval = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
-    
-    retval.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//    retval.overlayColor = KDIColorWA(1.0, 0.85);
-    
-    return retval;
+    return self.backgroundView;
 }
 
 - (IBAction)_buttonAction:(id)sender {

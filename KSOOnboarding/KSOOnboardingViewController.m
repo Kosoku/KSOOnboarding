@@ -16,6 +16,7 @@
 #import "KSOOnboardingViewController.h"
 #import "KSOOnboardingViewModel.h"
 #import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
+#import "KSOOnboardingTheme.h"
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
@@ -156,8 +157,13 @@
     self.viewModel.delegate = delegate;
 }
 
+- (void)setTheme:(KSOOnboardingTheme *)theme {
+    _theme = theme ?: KSOOnboardingTheme.defaultTheme;
+}
+
 - (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems; {
     _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:onboardingItems onboardingViewController:self];
+    _theme = KSOOnboardingTheme.defaultTheme;
 }
 
 @end

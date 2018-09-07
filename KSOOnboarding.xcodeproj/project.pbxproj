@@ -47,6 +47,8 @@
 		07A43D752142F31C0015F9ED /* KSOOnboardingMovieBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D732142F31B0015F9ED /* KSOOnboardingMovieBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A43D762142F31C0015F9ED /* KSOOnboardingMovieBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D742142F31C0015F9ED /* KSOOnboardingMovieBackgroundView.m */; };
 		07A43D782142F54B0015F9ED /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 07A43D772142F54B0015F9ED /* movie.mp4 */; };
+		07A43D7B214303F20015F9ED /* KSOOnboardingTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D79214303F20015F9ED /* KSOOnboardingTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07A43D7C214303F20015F9ED /* KSOOnboardingTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D7A214303F20015F9ED /* KSOOnboardingTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,8 @@
 		07A43D732142F31B0015F9ED /* KSOOnboardingMovieBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingMovieBackgroundView.h; sourceTree = "<group>"; };
 		07A43D742142F31C0015F9ED /* KSOOnboardingMovieBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingMovieBackgroundView.m; sourceTree = "<group>"; };
 		07A43D772142F54B0015F9ED /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
+		07A43D79214303F20015F9ED /* KSOOnboardingTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingTheme.h; sourceTree = "<group>"; };
+		07A43D7A214303F20015F9ED /* KSOOnboardingTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 		07A43D142141BB370015F9ED /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				07A43D79214303F20015F9ED /* KSOOnboardingTheme.h */,
+				07A43D7A214303F20015F9ED /* KSOOnboardingTheme.m */,
 				07A43D5521420DD10015F9ED /* KSOOnboardingItem.h */,
 				07A43D5621420DD10015F9ED /* KSOOnboardingItem.m */,
 				07A43D62214228880015F9ED /* KSOOnboardingItemViewController.h */,
@@ -262,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A43D172141BB680015F9ED /* KSOOnboardingViewController.h in Headers */,
+				07A43D7B214303F20015F9ED /* KSOOnboardingTheme.h in Headers */,
 				07A43D63214228880015F9ED /* KSOOnboardingItemViewController.h in Headers */,
 				07A43D602142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h in Headers */,
 				07A43D0D2141BA280015F9ED /* KSOOnboarding.h in Headers */,
@@ -399,6 +406,7 @@
 				07A43D7221425F780015F9ED /* KSOOnboardingImageBackgroundView.m in Sources */,
 				07A43D182141BB680015F9ED /* KSOOnboardingViewController.m in Sources */,
 				07A43D612142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m in Sources */,
+				07A43D7C214303F20015F9ED /* KSOOnboardingTheme.m in Sources */,
 				07A43D5821420DD10015F9ED /* KSOOnboardingItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

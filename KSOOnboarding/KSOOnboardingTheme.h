@@ -1,8 +1,8 @@
 //
-//  KSOOnboarding.h
-//  KSOOnboarding
+//  KSOOnboardingTheme.h
+//  KSOOnboarding-iOS
 //
-//  Created by William Towe on 9/6/18.
+//  Created by William Towe on 9/7/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,17 +15,36 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOOnboarding.
-FOUNDATION_EXPORT double KSOOnboardingVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for KSOOnboarding.
-FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
+@interface KSOOnboardingTheme : NSObject <NSCopying>
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOOnboarding/PublicHeader.h>
+/**
+ Set and get the default onboarding theme.
+ */
+@property (class,strong,nonatomic,null_resettable) KSOOnboardingTheme *defaultTheme;
 
-#import <KSOOnboarding/KSOOnboardingTheme.h>
-#import <KSOOnboarding/KSOOnboardingItem.h>
-#import <KSOOnboarding/KSOOnboardingItemViewController.h>
-#import <KSOOnboarding/KSOOnboardingImageBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingMovieBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingViewController.h>
+/**
+ The identifier of the theme.
+ */
+@property (readonly,copy,nonatomic) NSString *identifier;
+
+@property (strong,nonatomic,nullable) UIColor *imageColor;
+@property (strong,nonatomic,null_resettable) UIColor *headlineColor;
+@property (strong,nonatomic,null_resettable) UIColor *bodyColor;
+@property (strong,nonatomic,nullable) UIColor *actionColor;
+
+/**
+ The designated initializer.
+ 
+ @param identifier The identifier of the receiver
+ @return The initialized instance
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+NS_ASSUME_NONNULL_END

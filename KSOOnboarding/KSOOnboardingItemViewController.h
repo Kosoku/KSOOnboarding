@@ -16,7 +16,11 @@
 #import <Foundation/Foundation.h>
 #import <KSOOnboarding/KSOOnboardingItem.h>
 
+@class KSOOnboardingTheme;
+
 @protocol KSOOnboardingItemViewController <NSObject>
 @required
 @property (strong,nonatomic) __kindof KSOOnboardingItem *onboardingItem;
+@optional
+@property (strong,nonatomic) KSOOnboardingTheme *onboardingTheme;
 @end

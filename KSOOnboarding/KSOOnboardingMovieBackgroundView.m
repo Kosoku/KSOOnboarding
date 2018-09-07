@@ -27,6 +27,13 @@
 
 @implementation KSOOnboardingMovieBackgroundView
 
+- (void)didMoveToWindow {
+    [super didMoveToWindow];
+    
+    if (self.window != nil) {
+        [self.player play];
+    }
+}
 - (void)didAddSubview:(UIView *)subview {
     [super didAddSubview:subview];
     
@@ -52,8 +59,6 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:_player.currentItem];
-    
-    [_player play];
     
     return self;
 }

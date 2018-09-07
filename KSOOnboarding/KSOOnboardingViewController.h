@@ -19,6 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class KSOOnboardingTheme;
 @protocol KSOOnboardingViewControllerDataSource;
 @protocol KSOOnboardingViewControllerDelegate;
 
@@ -26,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDataSource> dataSource;
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDelegate> delegate;
+
+@property (strong,nonatomic,null_resettable) KSOOnboardingTheme *theme;
 
 - (instancetype)initWithOnboardingItems:(NSArray<__kindof KSOOnboardingItem *> *)onboardingItems;
 
