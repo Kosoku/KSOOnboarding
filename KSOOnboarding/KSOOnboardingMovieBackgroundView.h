@@ -1,8 +1,8 @@
 //
-//  KSOOnboarding.h
-//  KSOOnboarding
+//  KSOOnboardingMovieBackgroundView.h
+//  KSOOnboarding-iOS
 //
-//  Created by William Towe on 9/6/18.
+//  Created by William Towe on 9/7/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -14,17 +14,16 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVAsset.h>
 
-//! Project version number for KSOOnboarding.
-FOUNDATION_EXPORT double KSOOnboardingVersionNumber;
+@interface KSOOnboardingMovieBackgroundView : UIView
 
-//! Project version string for KSOOnboarding.
-FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
+@property (strong,nonatomic,nullable) UIBlurEffect *blurEffect;
+@property (strong,nonatomic,nullable) UIColor *overlayColor;
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOOnboarding/PublicHeader.h>
+- (instancetype)initWithAsset:(AVAsset *)asset NS_DESIGNATED_INITIALIZER;
 
-#import <KSOOnboarding/KSOOnboardingItem.h>
-#import <KSOOnboarding/KSOOnboardingItemViewController.h>
-#import <KSOOnboarding/KSOOnboardingImageBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingMovieBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingViewController.h>
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+
+@end

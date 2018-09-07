@@ -35,10 +35,17 @@ static CGSize const kImageSize = {.width=128, .height=128};
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
-    KSOOnboardingImageBackgroundView *retval = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+//    KSOOnboardingImageBackgroundView *retval = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+//
+//    retval.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    retval.overlayColor = KDIColorWA(1.0, 0.25);
+//
+//    return retval;
+    
+    KSOOnboardingMovieBackgroundView *retval = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
     
     retval.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    retval.overlayColor = KDIColorWA(1.0, 0.25);
+//    retval.overlayColor = KDIColorWA(1.0, 0.85);
     
     return retval;
 }

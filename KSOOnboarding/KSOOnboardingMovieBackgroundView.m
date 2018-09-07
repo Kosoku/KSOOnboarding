@@ -1,5 +1,5 @@
 //
-//  KSOOnboardingImageBackgroundView.m
+//  KSOOnboardingMovieBackgroundView.m
 //  KSOOnboarding-iOS
 //
 //  Created by William Towe on 9/7/18.
@@ -13,15 +13,19 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "KSOOnboardingImageBackgroundView.h"
+#import "KSOOnboardingMovieBackgroundView.h"
 
-@interface KSOOnboardingImageBackgroundView ()
-@property (strong,nonatomic) UIImageView *imageView;
+#import <AVFoundation/AVFoundation.h>
+
+@interface KSOOnboardingMovieBackgroundView ()
+@property (strong,nonatomic) AVPlayer *player;
 @property (strong,nonatomic) UIVisualEffectView *blurVisualEffectView;
 @property (strong,nonatomic) UIView *overlayView;
+
+@property (readonly,nonatomic) AVPlayerLayer *playerLayer;
 @end
 
-@implementation KSOOnboardingImageBackgroundView
+@implementation KSOOnboardingMovieBackgroundView
 
 - (void)didAddSubview:(UIView *)subview {
     [super didAddSubview:subview];
@@ -31,17 +35,25 @@
     }
 }
 
-- (instancetype)initWithImage:(UIImage *)image {
++ (Class)layerClass {
+    return AVPlayerLayer.class;
+}
+
+- (instancetype)initWithAsset:(AVAsset *)asset {
     if (!(self = [super initWithFrame:CGRectZero]))
         return nil;
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    _imageView.image = image;
-    [self addSubview:_imageView];
+    _player = [[AVPlayer alloc] initWithPlayerItem:[AVPlayerItem playerItemWithAsset:asset]];
+    _player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+    _player.muted = YES;
     
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _imageView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _imageView}]];
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.playerLayer.player = _player;
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:_player.currentItem];
+    
+    [_player play];
     
     return self;
 }
@@ -78,6 +90,15 @@
         
         self.overlayView.backgroundColor = _overlayColor;
     }
+}
+
+- (AVPlayerLayer *)playerLayer {
+    return (AVPlayerLayer *)self.layer;
+}
+
+- (void)_didPlayToEndTime:(NSNotification *)note {
+    [self.player seekToTime:kCMTimeZero];
+    [self.player play];
 }
 
 @end
