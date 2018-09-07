@@ -24,5 +24,6 @@ FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <KSOOnboarding/PublicHeader.h>
 
 #import <KSOOnboarding/KSOOnboardingItem.h>
+#import <KSOOnboarding/KSOOnboardingItemViewController.h>
 #import <KSOOnboarding/KSOOnboardingItemModel.h>
 #import <KSOOnboarding/KSOOnboardingViewController.h>

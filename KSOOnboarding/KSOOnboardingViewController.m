@@ -16,9 +16,13 @@
 #import "KSOOnboardingViewController.h"
 #import "KSOOnboardingViewModel.h"
 
-@interface KSOOnboardingViewController ()
+#import <Ditko/Ditko.h>
+
+@interface KSOOnboardingViewController () <UIPageViewControllerDataSource>
 @property (strong,nonatomic) KSOOnboardingViewModel *viewModel;
 
+@property (strong,nonatomic) UIView *backgroundView;
+@property (strong,nonatomic) UIPageViewController *pageViewController;
 @end
 
 @implementation KSOOnboardingViewController
@@ -35,7 +39,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    KDIGradientView *backgroundView = [[KDIGradientView alloc] initWithFrame:CGRectZero];
     
+    backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+    backgroundView.colors = @[KDIColorRandomHSB(),
+                              KDIColorRandomHSB(),
+                              KDIColorRandomHSB()];
+    
+    self.backgroundView = backgroundView;
+    [self.view addSubview:self.backgroundView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+    
+    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    self.pageViewController.dataSource = self;
+    
+    UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:0]];
+    
+    [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    [self addChildViewController:self.pageViewController];
+    self.pageViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.pageViewController.view];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.pageViewController.view}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.pageViewController.view}]];
+    
+    [self.pageViewController didMoveToParentViewController:self];
 }
 
 - (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems {

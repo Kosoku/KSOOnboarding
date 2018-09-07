@@ -15,6 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KSOOnboarding/KSOOnboardingItem.h>
+#import <KSOOnboarding/KSOOnboardingItemViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol KSOOnboardingViewControllerDelegate <NSObject>
-
+@optional
+- (nullable __kindof UIViewController<KSOOnboardingItemViewController> *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController viewControllerForOnboardingItem:(id<KSOOnboardingItem>)onboardingItem;
 @end
 
 NS_ASSUME_NONNULL_END
