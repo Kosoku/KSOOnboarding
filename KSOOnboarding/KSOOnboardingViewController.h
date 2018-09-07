@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol KSOOnboardingViewControllerDelegate <NSObject>
 @optional
 - (nullable __kindof UIViewController<KSOOnboardingItemViewController> *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController viewControllerForOnboardingItem:(__kindof KSOOnboardingItem *)onboardingItem;
+
+- (nullable __kindof UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController;
 @end
 
 NS_ASSUME_NONNULL_END

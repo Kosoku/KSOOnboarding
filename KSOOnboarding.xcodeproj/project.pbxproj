@@ -232,9 +232,9 @@
 			children = (
 				07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */,
 				07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */,
+				07A43D6B214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h */,
 				07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */,
 				07A43D5F2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m */,
-				07A43D6B214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h */,
 			);
 			path = Private;
 			sourceTree = "<group>";

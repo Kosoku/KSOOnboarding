@@ -38,7 +38,7 @@
     self.stackView = [[UIStackView alloc] initWithFrame:CGRectZero];
     self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
     self.stackView.axis = UILayoutConstraintAxisVertical;
-    self.stackView.alignment = UIStackViewAlignmentLeading;
+    self.stackView.alignment = UIStackViewAlignmentCenter;
     self.stackView.distribution = UIStackViewDistributionEqualSpacing;
     self.stackView.spacing = 20.0;
     [self.view addSubview:self.stackView];
@@ -51,6 +51,7 @@
     self.headlineLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.headlineLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.headlineLabel.numberOfLines = 0;
+    self.headlineLabel.textAlignment = NSTextAlignmentCenter;
     self.headlineLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleHeadline;
     self.headlineLabel.text = self.onboardingItem.headline;
     [self.stackView addArrangedSubview:self.headlineLabel];
@@ -58,6 +59,7 @@
     self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.bodyLabel.numberOfLines = 0;
+    self.bodyLabel.textAlignment = NSTextAlignmentCenter;
     self.bodyLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleBody;
     self.bodyLabel.text = self.onboardingItem.body;
     [self.stackView addArrangedSubview:self.bodyLabel];

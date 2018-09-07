@@ -24,6 +24,7 @@
 
 @property (strong,nonatomic) UIView *backgroundView;
 @property (strong,nonatomic) UIPageViewController *pageViewController;
+@property (strong,nonatomic) UIButton *dismissButton;
 @end
 
 @implementation KSOOnboardingViewController
@@ -40,18 +41,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    KDIGradientView *backgroundView = [[KDIGradientView alloc] initWithFrame:CGRectZero];
+    self.view.backgroundColor = UIColor.whiteColor;
     
-    backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-    backgroundView.colors = @[KDIColorRandomHSB(),
-                              KDIColorRandomHSB(),
-                              KDIColorRandomHSB()];
-    
-    self.backgroundView = backgroundView;
-    [self.view addSubview:self.backgroundView];
-    
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+    if ([self.delegate respondsToSelector:@selector(backgroundViewForOnboardingViewController:)]) {
+        self.backgroundView = [self.delegate backgroundViewForOnboardingViewController:self];
+        
+        if (self.backgroundView != nil) {
+            self.backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self.view addSubview:self.backgroundView];
+            
+            [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+            [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+        }
+    }
     
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.dataSource = self;
@@ -68,6 +70,14 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.pageViewController.view}]];
     
     [self.pageViewController didMoveToParentViewController:self];
+    
+    self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
+    [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [self.view addSubview:self.dismissButton];
+    
+    [NSLayoutConstraint activateConstraints:@[[self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToSystemSpacingBelowAnchor:self.dismissButton.bottomAnchor multiplier:1.0], [self.dismissButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
