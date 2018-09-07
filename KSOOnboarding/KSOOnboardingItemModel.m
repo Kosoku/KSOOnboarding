@@ -17,4 +17,33 @@
 
 @implementation KSOOnboardingItemModel
 
+- (NSString *)onboardingItemHeadline {
+    return self.headline;
+}
+- (NSString *)onboardingItemBody {
+    return self.body;
+}
+- (NSString *)onboardingItemAction {
+    return self.action;
+}
+- (KSOOnboardingItemActionBlock)onboardingItemActionBlock {
+    return self.actionBlock;
+}
+
+- (instancetype)initWithHeadline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
+    if (!(self = [super init]))
+        return nil;
+    
+    _headline = [headline copy];
+    _body = [body copy];
+    _action = [action copy];
+    _actionBlock = [actionBlock copy];
+    
+    return self;
+}
+
++ (instancetype)onboardingItemModelWithHeadline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
+    return [[self alloc] initWithHeadline:headline body:body action:action actionBlock:actionBlock];
+}
+
 @end

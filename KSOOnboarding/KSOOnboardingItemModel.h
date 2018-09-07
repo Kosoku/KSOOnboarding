@@ -16,6 +16,19 @@
 #import <Foundation/Foundation.h>
 #import <KSOOnboarding/KSOOnboardingItem.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface KSOOnboardingItemModel : NSObject <KSOOnboardingItem>
 
+@property (copy,nonatomic,nullable) NSString *headline;
+@property (copy,nonatomic,nullable) NSString *body;
+@property (copy,nonatomic,nullable) NSString *action;
+@property (copy,nonatomic,nullable) KSOOnboardingItemActionBlock actionBlock;
+
+- (instancetype)initWithHeadline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock;
+
++ (instancetype)onboardingItemModelWithHeadline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock;
+
 @end
+
+NS_ASSUME_NONNULL_END

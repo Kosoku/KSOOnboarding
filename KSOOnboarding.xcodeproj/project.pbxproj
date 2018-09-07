@@ -36,6 +36,8 @@
 		07A43D5421420B930015F9ED /* KSOOnboardingItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5321420B930015F9ED /* KSOOnboardingItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A43D5721420DD10015F9ED /* KSOOnboardingItemModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5521420DD10015F9ED /* KSOOnboardingItemModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A43D5821420DD10015F9ED /* KSOOnboardingItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */; };
+		07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */; };
+		07A43D5D21421C3F0015F9ED /* KSOOnboardingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		07A43D5321420B930015F9ED /* KSOOnboardingItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingItem.h; sourceTree = "<group>"; };
 		07A43D5521420DD10015F9ED /* KSOOnboardingItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingItemModel.h; sourceTree = "<group>"; };
 		07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingItemModel.m; sourceTree = "<group>"; };
+		07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingViewModel.h; sourceTree = "<group>"; };
+		07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 				07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */,
 				07A43D152141BB680015F9ED /* KSOOnboardingViewController.h */,
 				07A43D162141BB680015F9ED /* KSOOnboardingViewController.m */,
+				07A43D5921421C120015F9ED /* Private */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -211,6 +216,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		07A43D5921421C120015F9ED /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */,
+				07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -222,6 +236,7 @@
 				07A43D0D2141BA280015F9ED /* KSOOnboarding.h in Headers */,
 				07A43D5721420DD10015F9ED /* KSOOnboardingItemModel.h in Headers */,
 				07A43D5421420B930015F9ED /* KSOOnboardingItem.h in Headers */,
+				07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D5D21421C3F0015F9ED /* KSOOnboardingViewModel.m in Sources */,
 				07A43D182141BB680015F9ED /* KSOOnboardingViewController.m in Sources */,
 				07A43D5821420DD10015F9ED /* KSOOnboardingItemModel.m in Sources */,
 			);

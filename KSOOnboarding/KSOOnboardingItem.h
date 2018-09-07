@@ -15,6 +15,16 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol KSOOnboardingItem <NSObject>
+NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^KSOOnboardingItemActionBlock)(void);
+
+@protocol KSOOnboardingItem <NSObject>
+@optional
+@property (readonly,copy,nonatomic,nullable) NSString *onboardingItemHeadline;
+@property (readonly,copy,nonatomic,nullable) NSString *onboardingItemBody;
+@property (readonly,copy,nonatomic,nullable) NSString *onboardingItemAction;
+@property (readonly,copy,nonatomic,nullable) KSOOnboardingItemActionBlock onboardingItemActionBlock;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -26,14 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDataSource> dataSource;
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDelegate> delegate;
 
+- (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems;
+
 @end
 
 @protocol KSOOnboardingViewControllerDataSource <NSObject>
 @required
 - (NSInteger)numberOfOnboardingItemsForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController;
 - (id<KSOOnboardingItem>)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController onboardingItemAtIndex:(NSInteger)index;
-@optional
-- (id<KSOOnboardingItem>)initiallySelectedOnboardingItemForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController;
 @end
 
 @protocol KSOOnboardingViewControllerDelegate <NSObject>
