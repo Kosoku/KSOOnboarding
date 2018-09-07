@@ -1,8 +1,8 @@
 //
-//  ViewController.m
-//  Demo-iOS
+//  KSOOnboardingItem+KSOOnboardingPrivateExtensions.h
+//  KSOOnboarding-iOS
 //
-//  Created by William Towe on 9/6/18.
+//  Created by William Towe on 9/7/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,34 +13,10 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import "ViewController.h"
-#import "LoremIpsum.h"
+#import "KSOOnboardingItem.h"
 
-#import <KSOOnboarding/KSOOnboarding.h>
-#import <Ditko/Ditko.h>
+@interface KSOOnboardingItem (KSOOnboardingPrivateExtensions)
 
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-}
-
-- (IBAction)_buttonAction:(id)sender {
-    NSMutableArray *temp = [[NSMutableArray alloc] init];
-    
-    for (NSInteger i=0; i<5; i++) {
-        [temp addObject:[KSOOnboardingItem onboardingItemModelWithImage:nil headline:LoremIpsum.title body:LoremIpsum.sentence action:LoremIpsum.word actionBlock:^{
-            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.title, KDIUIAlertControllerOptionsKeyMessage: LoremIpsum.sentence} completion:nil];
-        }]];
-    }
-    
-    [self presentViewController:[[KSOOnboardingViewController alloc] initWithOnboardingItems:temp] animated:YES completion:nil];
-}
+@property (assign,nonatomic) NSInteger onboardingItemIndex;
 
 @end

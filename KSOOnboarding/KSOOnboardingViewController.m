@@ -15,6 +15,7 @@
 
 #import "KSOOnboardingViewController.h"
 #import "KSOOnboardingViewModel.h"
+#import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
 
 #import <Ditko/Ditko.h>
 
@@ -67,6 +68,25 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.pageViewController.view}]];
     
     [self.pageViewController didMoveToParentViewController:self];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    NSInteger index = [(id<KSOOnboardingItemViewController>)viewController onboardingItem].onboardingItemIndex;
+    
+    if ((++index) >= self.viewModel.numberOfOnboardingItems) {
+        return nil;
+    }
+    
+    return [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:index]];
+}
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    NSInteger index = [(id<KSOOnboardingItemViewController>)viewController onboardingItem].onboardingItemIndex;
+    
+    if ((--index) < 0) {
+        return nil;
+    }
+    
+    return [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:index]];
 }
 
 - (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems {

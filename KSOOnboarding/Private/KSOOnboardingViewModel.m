@@ -15,6 +15,7 @@
 
 #import "KSOOnboardingViewModel.h"
 #import "KSOOnboardingDefaultItemViewController.h"
+#import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
 
 #import <Stanley/Stanley.h>
 
@@ -36,12 +37,18 @@
 }
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index {
+    KSOOnboardingItem *retval = nil;
+    
     if (KSTIsEmptyObject(self.onboardingItems)) {
-        return [self.dataSource onboardingViewController:self.onboardingViewController onboardingItemAtIndex:index];
+        retval = [self.dataSource onboardingViewController:self.onboardingViewController onboardingItemAtIndex:index];
     }
     else {
-        return self.onboardingItems[index];
+        retval = self.onboardingItems[index];
     }
+    
+    retval.onboardingItemIndex = index;
+    
+    return retval;
 }
 - (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem {
     UIViewController<KSOOnboardingItemViewController> *retval = nil;

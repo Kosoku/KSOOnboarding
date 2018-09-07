@@ -38,7 +38,7 @@
     self.stackView = [[UIStackView alloc] initWithFrame:CGRectZero];
     self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
     self.stackView.axis = UILayoutConstraintAxisVertical;
-    self.stackView.alignment = UIStackViewAlignmentCenter;
+    self.stackView.alignment = UIStackViewAlignmentLeading;
     self.stackView.distribution = UIStackViewDistributionEqualSpacing;
     self.stackView.spacing = 20.0;
     [self.view addSubview:self.stackView];
@@ -50,12 +50,14 @@
     
     self.headlineLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.headlineLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.headlineLabel.numberOfLines = 0;
     self.headlineLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleHeadline;
     self.headlineLabel.text = self.onboardingItem.headline;
     [self.stackView addArrangedSubview:self.headlineLabel];
     
     self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.bodyLabel.numberOfLines = 0;
     self.bodyLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleBody;
     self.bodyLabel.text = self.onboardingItem.body;
     [self.stackView addArrangedSubview:self.bodyLabel];
@@ -70,10 +72,14 @@
             self.onboardingItem.actionBlock();
         }
     } forControlEvents:UIControlEventTouchUpInside];
-    [self.stackView addArrangedSubview:self.bodyLabel];
+    [self.stackView addArrangedSubview:self.actionButton];
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": self.stackView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]->=0-[bottom]" options:0 metrics:nil views:@{@"view": self.stackView, @"top": self.view.safeAreaLayoutGuide, @"bottom": self.view.safeAreaLayoutGuide}]];
+    [NSLayoutConstraint activateConstraints:@[[self.stackView.topAnchor constraintEqualToSystemSpacingBelowAnchor:self.view.safeAreaLayoutGuide.topAnchor multiplier:1.0], [self.view.safeAreaLayoutGuide.bottomAnchor constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:self.stackView.bottomAnchor multiplier:1.0]]];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.headlineLabel}]];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.bodyLabel}]];
 }
 
 @synthesize onboardingItem=_onboardingItem;

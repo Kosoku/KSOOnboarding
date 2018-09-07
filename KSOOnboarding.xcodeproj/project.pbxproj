@@ -40,6 +40,8 @@
 		07A43D602142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07A43D612142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5F2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m */; };
 		07A43D63214228880015F9ED /* KSOOnboardingItemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D62214228880015F9ED /* KSOOnboardingItemViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07A43D6621423D4A0015F9ED /* LoremIpsum.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D6521423D4A0015F9ED /* LoremIpsum.m */; };
+		07A43D6D214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D6B214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,9 @@
 		07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingDefaultItemViewController.h; sourceTree = "<group>"; };
 		07A43D5F2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingDefaultItemViewController.m; sourceTree = "<group>"; };
 		07A43D62214228880015F9ED /* KSOOnboardingItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingItemViewController.h; sourceTree = "<group>"; };
+		07A43D6421423D4A0015F9ED /* LoremIpsum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoremIpsum.h; path = Vendor/LoremIpsum/LoremIpsum/LoremIpsum.h; sourceTree = SOURCE_ROOT; };
+		07A43D6521423D4A0015F9ED /* LoremIpsum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoremIpsum.m; path = Vendor/LoremIpsum/LoremIpsum/LoremIpsum.m; sourceTree = SOURCE_ROOT; };
+		07A43D6B214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +199,8 @@
 				07A43D202141BC550015F9ED /* AppDelegate.m */,
 				07A43D222141BC550015F9ED /* ViewController.h */,
 				07A43D232141BC550015F9ED /* ViewController.m */,
+				07A43D6421423D4A0015F9ED /* LoremIpsum.h */,
+				07A43D6521423D4A0015F9ED /* LoremIpsum.m */,
 				07A43D252141BC550015F9ED /* Main.storyboard */,
 				07A43D282141BC570015F9ED /* Assets.xcassets */,
 				07A43D2A2141BC570015F9ED /* LaunchScreen.storyboard */,
@@ -227,6 +234,7 @@
 				07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */,
 				07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */,
 				07A43D5F2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m */,
+				07A43D6B214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 				07A43D0D2141BA280015F9ED /* KSOOnboarding.h in Headers */,
 				07A43D5721420DD10015F9ED /* KSOOnboardingItem.h in Headers */,
 				07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */,
+				07A43D6D214246AD0015F9ED /* KSOOnboardingItem+KSOOnboardingPrivateExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A43D6621423D4A0015F9ED /* LoremIpsum.m in Sources */,
 				07A43D242141BC550015F9ED /* ViewController.m in Sources */,
 				07A43D2F2141BC570015F9ED /* main.m in Sources */,
 				07A43D212141BC550015F9ED /* AppDelegate.m in Sources */,
