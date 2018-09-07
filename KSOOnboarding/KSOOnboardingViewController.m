@@ -25,6 +25,7 @@
 
 @property (strong,nonatomic) UIView *backgroundView;
 @property (strong,nonatomic) UIPageViewController *pageViewController;
+@property (strong,nonatomic) UIPageControl *pageControl;
 @property (strong,nonatomic) UIButton *dismissButton;
 
 - (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems;
@@ -89,6 +90,18 @@
     [self.view addSubview:self.dismissButton];
     
     [NSLayoutConstraint activateConstraints:@[[self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToSystemSpacingBelowAnchor:self.dismissButton.bottomAnchor multiplier:1.0], [self.dismissButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
+    self.pageControl.translatesAutoresizingMaskIntoConstraints = NO;
+    self.pageControl.userInteractionEnabled = NO;
+    self.pageControl.hidesForSinglePage = YES;
+    self.pageControl.pageIndicatorTintColor = [self.view.backgroundColor.KDI_contrastingColor colorWithAlphaComponent:0.33];
+    self.pageControl.currentPageIndicatorTintColor = self.view.backgroundColor.KDI_contrastingColor;
+    self.pageControl.numberOfPages = self.viewModel.numberOfOnboardingItems;
+    [self.view addSubview:self.pageControl];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]-[bottom]" options:0 metrics:nil views:@{@"view": self.pageControl, @"bottom": self.dismissButton}]];
+    [NSLayoutConstraint activateConstraints:@[[self.pageControl.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -112,7 +125,10 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     if (completed) {
-        self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:[(id<KSOOnboardingItemViewController>)pageViewController.viewControllers.firstObject onboardingItem]];
+        KSOOnboardingItem *onboardingItem = [(id<KSOOnboardingItemViewController>)pageViewController.viewControllers.firstObject onboardingItem];
+        
+        self.pageControl.currentPage = onboardingItem.onboardingItemIndex;
+        self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:onboardingItem];
     }
 }
 
