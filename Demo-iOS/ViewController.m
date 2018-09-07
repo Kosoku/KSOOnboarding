@@ -22,7 +22,7 @@
 
 static CGSize const kImageSize = {.width=128, .height=128};
 
-@interface ViewController ()
+@interface ViewController () <KSOOnboardingViewControllerDelegate>
 
 @end
 
@@ -32,6 +32,10 @@ static CGSize const kImageSize = {.width=128, .height=128};
     [super viewDidLoad];
     
     
+}
+
+- (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
+    return [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
 }
 
 - (IBAction)_buttonAction:(id)sender {
@@ -48,7 +52,11 @@ static CGSize const kImageSize = {.width=128, .height=128};
         }]];
     }
     
-    [self presentViewController:[[KSOOnboardingViewController alloc] initWithOnboardingItems:temp] animated:YES completion:nil];
+    KSOOnboardingViewController *viewController = [[KSOOnboardingViewController alloc] initWithOnboardingItems:temp];
+    
+    viewController.delegate = self;
+    
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 @end
