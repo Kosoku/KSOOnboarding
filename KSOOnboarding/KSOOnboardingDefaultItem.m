@@ -1,5 +1,5 @@
 //
-//  KSOOnboardingItemModel.h
+//  KSOOnboardingItemModel.m
 //  KSOOnboarding-iOS
 //
 //  Created by William Towe on 9/6/18.
@@ -13,22 +13,41 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <Foundation/Foundation.h>
-#import <KSOOnboarding/KSOOnboardingItem.h>
+#import "KSOOnboardingDefaultItem.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation KSOOnboardingDefaultItem
 
-@interface KSOOnboardingItemModel : NSObject <KSOOnboardingItem>
+- (UIImage *)onboardingItemImage {
+    return self.image;
+}
+- (NSString *)onboardingItemHeadline {
+    return self.headline;
+}
+- (NSString *)onboardingItemBody {
+    return self.body;
+}
+- (NSString *)onboardingItemAction {
+    return self.action;
+}
+- (KSOOnboardingItemActionBlock)onboardingItemActionBlock {
+    return self.actionBlock;
+}
 
-@property (copy,nonatomic,nullable) NSString *headline;
-@property (copy,nonatomic,nullable) NSString *body;
-@property (copy,nonatomic,nullable) NSString *action;
-@property (copy,nonatomic,nullable) KSOOnboardingItemActionBlock actionBlock;
+- (instancetype)initWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
+    if (!(self = [super init]))
+        return nil;
+    
+    _image = image;
+    _headline = [headline copy];
+    _body = [body copy];
+    _action = [action copy];
+    _actionBlock = [actionBlock copy];
+    
+    return self;
+}
 
-- (instancetype)initWithHeadline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock;
-
-+ (instancetype)onboardingItemModelWithHeadline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock;
++ (instancetype)onboardingItemModelWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
+    return [[self alloc] initWithImage:image headline:headline body:body action:action actionBlock:actionBlock];
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

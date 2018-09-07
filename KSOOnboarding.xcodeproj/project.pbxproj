@@ -34,8 +34,8 @@
 		07A43D512141C1CC0015F9ED /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D502141C1CC0015F9ED /* Quicksilver.framework */; };
 		07A43D522141C1CC0015F9ED /* Quicksilver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D502141C1CC0015F9ED /* Quicksilver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07A43D5421420B930015F9ED /* KSOOnboardingItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5321420B930015F9ED /* KSOOnboardingItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		07A43D5721420DD10015F9ED /* KSOOnboardingItemModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5521420DD10015F9ED /* KSOOnboardingItemModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		07A43D5821420DD10015F9ED /* KSOOnboardingItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */; };
+		07A43D5721420DD10015F9ED /* KSOOnboardingDefaultItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5521420DD10015F9ED /* KSOOnboardingDefaultItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07A43D5821420DD10015F9ED /* KSOOnboardingDefaultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5621420DD10015F9ED /* KSOOnboardingDefaultItem.m */; };
 		07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07A43D5D21421C3F0015F9ED /* KSOOnboardingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */; };
 		07A43D602142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -100,8 +100,8 @@
 		07A43D4E2141C1BA0015F9ED /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D502141C1CC0015F9ED /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D5321420B930015F9ED /* KSOOnboardingItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingItem.h; sourceTree = "<group>"; };
-		07A43D5521420DD10015F9ED /* KSOOnboardingItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingItemModel.h; sourceTree = "<group>"; };
-		07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingItemModel.m; sourceTree = "<group>"; };
+		07A43D5521420DD10015F9ED /* KSOOnboardingDefaultItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingDefaultItem.h; sourceTree = "<group>"; };
+		07A43D5621420DD10015F9ED /* KSOOnboardingDefaultItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingDefaultItem.m; sourceTree = "<group>"; };
 		07A43D5A21421C3F0015F9ED /* KSOOnboardingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingViewModel.h; sourceTree = "<group>"; };
 		07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingViewModel.m; sourceTree = "<group>"; };
 		07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboardingDefaultItemViewController.h; sourceTree = "<group>"; };
@@ -180,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				07A43D5321420B930015F9ED /* KSOOnboardingItem.h */,
-				07A43D5521420DD10015F9ED /* KSOOnboardingItemModel.h */,
-				07A43D5621420DD10015F9ED /* KSOOnboardingItemModel.m */,
+				07A43D5521420DD10015F9ED /* KSOOnboardingDefaultItem.h */,
+				07A43D5621420DD10015F9ED /* KSOOnboardingDefaultItem.m */,
 				07A43D62214228880015F9ED /* KSOOnboardingItemViewController.h */,
 				07A43D152141BB680015F9ED /* KSOOnboardingViewController.h */,
 				07A43D162141BB680015F9ED /* KSOOnboardingViewController.m */,
@@ -245,7 +245,7 @@
 				07A43D63214228880015F9ED /* KSOOnboardingItemViewController.h in Headers */,
 				07A43D602142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h in Headers */,
 				07A43D0D2141BA280015F9ED /* KSOOnboarding.h in Headers */,
-				07A43D5721420DD10015F9ED /* KSOOnboardingItemModel.h in Headers */,
+				07A43D5721420DD10015F9ED /* KSOOnboardingDefaultItem.h in Headers */,
 				07A43D5421420B930015F9ED /* KSOOnboardingItem.h in Headers */,
 				07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */,
 			);
@@ -374,7 +374,7 @@
 				07A43D5D21421C3F0015F9ED /* KSOOnboardingViewModel.m in Sources */,
 				07A43D182141BB680015F9ED /* KSOOnboardingViewController.m in Sources */,
 				07A43D612142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m in Sources */,
-				07A43D5821420DD10015F9ED /* KSOOnboardingItemModel.m in Sources */,
+				07A43D5821420DD10015F9ED /* KSOOnboardingDefaultItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

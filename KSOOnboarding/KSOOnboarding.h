@@ -25,5 +25,5 @@ FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
 
 #import <KSOOnboarding/KSOOnboardingItem.h>
 #import <KSOOnboarding/KSOOnboardingItemViewController.h>
-#import <KSOOnboarding/KSOOnboardingItemModel.h>
+#import <KSOOnboarding/KSOOnboardingDefaultItem.h>
 #import <KSOOnboarding/KSOOnboardingViewController.h>
