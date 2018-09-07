@@ -81,7 +81,7 @@ static void const *kDefaultThemeKey = &kDefaultThemeKey;
     return UIColor.blackColor;
 }
 + (UIColor *)defaultBodyColor {
-    return KDIColorW(0.9);
+    return KDIColorW(0.1);
 }
 
 @end

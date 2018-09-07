@@ -46,6 +46,7 @@
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.tintColor = self.onboardingTheme.imageColor;
     self.imageView.image = self.onboardingItem.image;
     [self.stackView addArrangedSubview:self.imageView];
     
@@ -54,6 +55,7 @@
     self.headlineLabel.numberOfLines = 0;
     self.headlineLabel.textAlignment = NSTextAlignmentCenter;
     self.headlineLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleHeadline;
+    self.headlineLabel.textColor = self.onboardingTheme.headlineColor;
     self.headlineLabel.text = self.onboardingItem.headline;
     [self.stackView addArrangedSubview:self.headlineLabel];
     
@@ -62,11 +64,13 @@
     self.bodyLabel.numberOfLines = 0;
     self.bodyLabel.textAlignment = NSTextAlignmentCenter;
     self.bodyLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleBody;
+    self.bodyLabel.textColor = self.onboardingTheme.bodyColor;
     self.bodyLabel.text = self.onboardingItem.body;
     [self.stackView addArrangedSubview:self.bodyLabel];
     
     self.actionButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.actionButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.actionButton.tintColor = self.onboardingTheme.actionColor;
     self.actionButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
     [self.actionButton setTitle:self.onboardingItem.action forState:UIControlStateNormal];
     [self.actionButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
@@ -87,16 +91,5 @@
 
 @synthesize onboardingItem=_onboardingItem;
 @synthesize onboardingTheme=_onboardingTheme;
-- (void)setOnboardingTheme:(KSOOnboardingTheme *)onboardingTheme {
-    _onboardingTheme = onboardingTheme;
-    
-    self.imageView.tintColor = _onboardingTheme.imageColor;
-    
-    self.headlineLabel.textColor = _onboardingTheme.headlineColor;
-    
-    self.bodyLabel.textColor = _onboardingTheme.bodyColor;
-    
-    self.actionButton.tintColor = _onboardingTheme.actionColor;
-}
 
 @end

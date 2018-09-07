@@ -16,6 +16,7 @@
 #import "KSOOnboardingViewModel.h"
 #import "KSOOnboardingDefaultItemViewController.h"
 #import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
+#import "KSOOnboardingTheme.h"
 
 #import <Stanley/Stanley.h>
 
@@ -32,6 +33,8 @@
     
     _onboardingItems = [onboardingItems copy];
     _onboardingViewController = onboardingViewController;
+    
+    _theme = KSOOnboardingTheme.defaultTheme;
     
     return self;
 }
@@ -59,8 +62,12 @@
     
     if (retval == nil) {
         retval = [[KSOOnboardingDefaultItemViewController alloc] initWithNibName:nil bundle:nil];
-        
-        retval.onboardingItem = onboardingItem;
+    }
+    
+    retval.onboardingItem = onboardingItem;
+    
+    if ([retval respondsToSelector:@selector(setOnboardingTheme:)]) {
+        retval.onboardingTheme = self.theme;
     }
     
     return retval;
@@ -82,6 +89,10 @@
             [self.delegate onboardingViewControllerDidDismiss:self.onboardingViewController];
         }
     }];
+}
+
+- (void)setTheme:(KSOOnboardingTheme *)theme {
+    _theme = theme ?: KSOOnboardingTheme.defaultTheme;
 }
 
 - (NSInteger)numberOfOnboardingItems {

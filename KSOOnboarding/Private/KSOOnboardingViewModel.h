@@ -16,10 +16,14 @@
 #import <Foundation/Foundation.h>
 #import "KSOOnboardingViewController.h"
 
+@class KSOOnboardingTheme;
+
 @interface KSOOnboardingViewModel : NSObject
 
 @property (weak,nonatomic) id<KSOOnboardingViewControllerDataSource> dataSource;
 @property (weak,nonatomic) id<KSOOnboardingViewControllerDelegate> delegate;
+
+@property (strong,nonatomic) KSOOnboardingTheme *theme;
 
 @property (readonly,nonatomic) NSInteger numberOfOnboardingItems;
 

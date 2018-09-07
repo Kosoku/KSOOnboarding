@@ -83,6 +83,7 @@
     self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:viewController.onboardingItem];
     self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
+    self.dismissButton.tintColor = self.theme.actionColor;
     [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
     [self.dismissButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
@@ -96,8 +97,8 @@
     self.pageControl.translatesAutoresizingMaskIntoConstraints = NO;
     self.pageControl.userInteractionEnabled = NO;
     self.pageControl.hidesForSinglePage = YES;
-    self.pageControl.pageIndicatorTintColor = [self.view.backgroundColor.KDI_contrastingColor colorWithAlphaComponent:0.33];
-    self.pageControl.currentPageIndicatorTintColor = self.view.backgroundColor.KDI_contrastingColor;
+    self.pageControl.pageIndicatorTintColor = [self.theme.headlineColor colorWithAlphaComponent:0.33];
+    self.pageControl.currentPageIndicatorTintColor = self.theme.headlineColor;
     self.pageControl.numberOfPages = self.viewModel.numberOfOnboardingItems;
     [self.view addSubview:self.pageControl];
     
@@ -157,13 +158,16 @@
     self.viewModel.delegate = delegate;
 }
 
+@dynamic theme;
+- (KSOOnboardingTheme *)theme {
+    return self.viewModel.theme;
+}
 - (void)setTheme:(KSOOnboardingTheme *)theme {
-    _theme = theme ?: KSOOnboardingTheme.defaultTheme;
+    self.viewModel.theme = theme;
 }
 
 - (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems; {
     _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:onboardingItems onboardingViewController:self];
-    _theme = KSOOnboardingTheme.defaultTheme;
 }
 
 @end
