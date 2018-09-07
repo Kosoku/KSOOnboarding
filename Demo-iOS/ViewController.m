@@ -37,7 +37,8 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
     KSOOnboardingImageBackgroundView *retval = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
     
-    retval.overlayColor = KDIColorWA(1.0, 0.85);
+    retval.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    retval.overlayColor = KDIColorWA(1.0, 0.25);
     
     return retval;
 }

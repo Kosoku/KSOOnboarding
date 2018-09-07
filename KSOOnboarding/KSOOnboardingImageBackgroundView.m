@@ -15,14 +15,23 @@
 
 #import "KSOOnboardingImageBackgroundView.h"
 
-#import <Ditko/Ditko.h>
+#import <Loki/Loki.h>
 
 @interface KSOOnboardingImageBackgroundView ()
 @property (strong,nonatomic) UIImageView *imageView;
+@property (strong,nonatomic) UIVisualEffectView *blurVisualEffectView;
 @property (strong,nonatomic) UIView *overlayView;
 @end
 
 @implementation KSOOnboardingImageBackgroundView
+
+- (void)didAddSubview:(UIView *)subview {
+    [super didAddSubview:subview];
+    
+    if (self.overlayView != nil) {
+        [self bringSubviewToFront:self.overlayView];
+    }
+}
 
 - (instancetype)initWithImage:(UIImage *)image {
     if (!(self = [super initWithFrame:CGRectZero]))
@@ -39,6 +48,20 @@
     return self;
 }
 
+- (void)setBlurEffect:(UIBlurEffect *)blurEffect {
+    _blurEffect = blurEffect;
+    
+    [self.blurVisualEffectView removeFromSuperview];
+    
+    if (_blurEffect != nil) {
+        self.blurVisualEffectView = [[UIVisualEffectView alloc] initWithEffect:_blurEffect];
+        self.blurVisualEffectView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.blurVisualEffectView];
+        
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.blurVisualEffectView}]];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.blurVisualEffectView}]];
+    }
+}
 - (void)setOverlayColor:(UIColor *)overlayColor {
     _overlayColor = overlayColor;
     
