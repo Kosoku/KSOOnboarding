@@ -18,13 +18,16 @@
 #import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
 
 #import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
-@interface KSOOnboardingViewController () <UIPageViewControllerDataSource>
+@interface KSOOnboardingViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 @property (strong,nonatomic) KSOOnboardingViewModel *viewModel;
 
 @property (strong,nonatomic) UIView *backgroundView;
 @property (strong,nonatomic) UIPageViewController *pageViewController;
 @property (strong,nonatomic) UIButton *dismissButton;
+
+- (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems;
 @end
 
 @implementation KSOOnboardingViewController
@@ -33,13 +36,15 @@
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
     
-    _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:nil onboardingViewController:self];
+    [self _KSOOnboardingViewControllerInitWithOnboardingItems:nil];
     
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    kstWeakify(self);
     
     self.view.backgroundColor = UIColor.whiteColor;
     
@@ -57,6 +62,7 @@
     
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.dataSource = self;
+    self.pageViewController.delegate = self;
     
     UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:0]];
     
@@ -73,8 +79,13 @@
     
     self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:viewController.onboardingItem];
     self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
     [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [self.dismissButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self.viewModel dismiss];
+    } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.dismissButton];
     
     [NSLayoutConstraint activateConstraints:@[[self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToSystemSpacingBelowAnchor:self.dismissButton.bottomAnchor multiplier:1.0], [self.dismissButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
@@ -99,11 +110,17 @@
     return [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:index]];
 }
 
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
+    if (completed) {
+        self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:[(id<KSOOnboardingItemViewController>)pageViewController.viewControllers.firstObject onboardingItem]];
+    }
+}
+
 - (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems {
     if (!(self = [super initWithNibName:nil bundle:nil]))
         return nil;
     
-    _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:onboardingItems onboardingViewController:self];
+    [self _KSOOnboardingViewControllerInitWithOnboardingItems:onboardingItems];
     
     return self;
 }
@@ -121,6 +138,10 @@
 }
 - (void)setDelegate:(id<KSOOnboardingViewControllerDelegate>)delegate {
     self.viewModel.delegate = delegate;
+}
+
+- (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems; {
+    _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:onboardingItems onboardingViewController:self];
 }
 
 @end

@@ -28,4 +28,7 @@
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index;
 - (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 
+- (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
+- (void)dismiss;
+
 @end

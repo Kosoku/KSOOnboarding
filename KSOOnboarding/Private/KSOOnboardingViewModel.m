@@ -66,6 +66,24 @@
     return retval;
 }
 
+- (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem; {
+    if ([self.delegate respondsToSelector:@selector(onboardingViewController:canDismissForOnboardingItem:)]) {
+        return [self.delegate onboardingViewController:self.onboardingViewController canDismissForOnboardingItem:onboardingItem];
+    }
+    return YES;
+}
+- (void)dismiss; {
+    if ([self.delegate respondsToSelector:@selector(onboardingViewControllerWillDismiss:)]) {
+        [self.delegate onboardingViewControllerWillDismiss:self.onboardingViewController];
+    }
+    
+    [self.onboardingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        if ([self.delegate respondsToSelector:@selector(onboardingViewControllerDidDismiss:)]) {
+            [self.delegate onboardingViewControllerDidDismiss:self.onboardingViewController];
+        }
+    }];
+}
+
 - (NSInteger)numberOfOnboardingItems {
     if (KSTIsEmptyObject(self.onboardingItems)) {
         return [self.dataSource numberOfOnboardingItemsForOnboardingViewController:self.onboardingViewController];
