@@ -18,6 +18,10 @@
 
 #import <KSOOnboarding/KSOOnboarding.h>
 #import <Ditko/Ditko.h>
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
+#import <Stanley/Stanley.h>
+
+static CGSize const kImageSize = {.width=128, .height=128};
 
 @interface ViewController ()
 
@@ -33,10 +37,15 @@
 
 - (IBAction)_buttonAction:(id)sender {
     NSMutableArray *temp = [[NSMutableArray alloc] init];
+    NSArray *imageStrings = @[@"\uf641",
+                              @"\uf2b9",
+                              @"\uf5d0",
+                              @"\uf13d",
+                              @"\uf5d1"];
     
     for (NSInteger i=0; i<5; i++) {
-        [temp addObject:[KSOOnboardingItem onboardingItemModelWithImage:nil headline:LoremIpsum.title body:LoremIpsum.sentence action:LoremIpsum.word actionBlock:^{
-            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.title, KDIUIAlertControllerOptionsKeyMessage: LoremIpsum.sentence} completion:nil];
+        [temp addObject:[KSOOnboardingItem onboardingItemModelWithImage:[UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage headline:LoremIpsum.title body:[LoremIpsum sentencesWithNumber:2] action:LoremIpsum.word.localizedCapitalizedString actionBlock:^{
+            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: LoremIpsum.sentence} completion:nil];
         }]];
     }
     
