@@ -19,13 +19,13 @@
 #import <Stanley/Stanley.h>
 
 @interface KSOOnboardingViewModel ()
-@property (copy,nonatomic) NSArray<id<KSOOnboardingItem>> *onboardingItems;
+@property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
 @property (weak,nonatomic) KSOOnboardingViewController *onboardingViewController;
 @end
 
 @implementation KSOOnboardingViewModel
 
-- (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController {
+- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController {
     if (!(self = [super init]))
         return nil;
     
@@ -35,7 +35,7 @@
     return self;
 }
 
-- (id<KSOOnboardingItem>)onboardingItemAtIndex:(NSInteger)index {
+- (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index {
     if (KSTIsEmptyObject(self.onboardingItems)) {
         return [self.dataSource onboardingViewController:self.onboardingViewController onboardingItemAtIndex:index];
     }
@@ -43,7 +43,7 @@
         return self.onboardingItems[index];
     }
 }
-- (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(id<KSOOnboardingItem>)onboardingItem {
+- (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem {
     UIViewController<KSOOnboardingItemViewController> *retval = nil;
     
     if ([self.delegate respondsToSelector:@selector(onboardingViewController:viewControllerForOnboardingItem:)]) {

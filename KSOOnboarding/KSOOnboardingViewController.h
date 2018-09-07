@@ -27,19 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDataSource> dataSource;
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDelegate> delegate;
 
-- (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems;
+- (instancetype)initWithOnboardingItems:(NSArray<__kindof KSOOnboardingItem *> *)onboardingItems;
 
 @end
 
 @protocol KSOOnboardingViewControllerDataSource <NSObject>
 @required
 - (NSInteger)numberOfOnboardingItemsForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController;
-- (id<KSOOnboardingItem>)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController onboardingItemAtIndex:(NSInteger)index;
+- (__kindof KSOOnboardingItem *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController onboardingItemAtIndex:(NSInteger)index;
 @end
 
 @protocol KSOOnboardingViewControllerDelegate <NSObject>
 @optional
-- (nullable __kindof UIViewController<KSOOnboardingItemViewController> *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController viewControllerForOnboardingItem:(id<KSOOnboardingItem>)onboardingItem;
+- (nullable __kindof UIViewController<KSOOnboardingItemViewController> *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController viewControllerForOnboardingItem:(__kindof KSOOnboardingItem *)onboardingItem;
 @end
 
 NS_ASSUME_NONNULL_END

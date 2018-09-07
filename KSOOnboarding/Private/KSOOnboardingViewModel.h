@@ -23,9 +23,9 @@
 
 @property (readonly,nonatomic) NSInteger numberOfOnboardingItems;
 
-- (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController;
+- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController;
 
-- (id<KSOOnboardingItem>)onboardingItemAtIndex:(NSInteger)index;
-- (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(id<KSOOnboardingItem>)onboardingItem;
+- (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index;
+- (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 
 @end

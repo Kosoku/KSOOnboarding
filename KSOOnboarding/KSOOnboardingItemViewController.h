@@ -18,5 +18,5 @@
 
 @protocol KSOOnboardingItemViewController <NSObject>
 @required
-@property (strong,nonatomic) id<KSOOnboardingItem> onboardingItem;
+@property (strong,nonatomic) __kindof KSOOnboardingItem *onboardingItem;
 @end

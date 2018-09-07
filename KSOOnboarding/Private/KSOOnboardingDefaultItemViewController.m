@@ -15,8 +15,15 @@
 
 #import "KSOOnboardingDefaultItemViewController.h"
 
-@interface KSOOnboardingDefaultItemViewController ()
+#import <Ditko/Ditko.h>
+#import <Stanley/Stanley.h>
 
+@interface KSOOnboardingDefaultItemViewController ()
+@property (strong,nonatomic) UIStackView *stackView;
+@property (strong,nonatomic) UIImageView *imageView;
+@property (strong,nonatomic) UILabel *headlineLabel;
+@property (strong,nonatomic) UILabel *bodyLabel;
+@property (strong,nonatomic) UIButton *actionButton;
 @end
 
 @implementation KSOOnboardingDefaultItemViewController
@@ -24,7 +31,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    kstWeakify(self);
+    
     self.view.backgroundColor = UIColor.clearColor;
+    
+    self.stackView = [[UIStackView alloc] initWithFrame:CGRectZero];
+    self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.stackView.axis = UILayoutConstraintAxisVertical;
+    self.stackView.alignment = UIStackViewAlignmentCenter;
+    self.stackView.distribution = UIStackViewDistributionEqualSpacing;
+    self.stackView.spacing = 20.0;
+    [self.view addSubview:self.stackView];
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.image = self.onboardingItem.image;
+    [self.stackView addArrangedSubview:self.imageView];
+    
+    self.headlineLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.headlineLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.headlineLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleHeadline;
+    self.headlineLabel.text = self.onboardingItem.headline;
+    [self.stackView addArrangedSubview:self.headlineLabel];
+    
+    self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.bodyLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleBody;
+    self.bodyLabel.text = self.onboardingItem.body;
+    [self.stackView addArrangedSubview:self.bodyLabel];
+    
+    self.actionButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.actionButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.actionButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
+    [self.actionButton setTitle:self.onboardingItem.action forState:UIControlStateNormal];
+    [self.actionButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        if (self.onboardingItem.actionBlock != nil) {
+            self.onboardingItem.actionBlock();
+        }
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self.stackView addArrangedSubview:self.bodyLabel];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": self.stackView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]->=0-[bottom]" options:0 metrics:nil views:@{@"view": self.stackView, @"top": self.view.safeAreaLayoutGuide, @"bottom": self.view.safeAreaLayoutGuide}]];
 }
 
 @synthesize onboardingItem=_onboardingItem;

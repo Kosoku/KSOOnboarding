@@ -69,7 +69,7 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
-- (instancetype)initWithOnboardingItems:(NSArray<id<KSOOnboardingItem>> *)onboardingItems {
+- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems {
     if (!(self = [super initWithNibName:nil bundle:nil]))
         return nil;
     
