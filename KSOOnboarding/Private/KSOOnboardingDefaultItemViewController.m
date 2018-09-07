@@ -45,6 +45,7 @@
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.tintColor = UIColor.blackColor;
     self.imageView.image = self.onboardingItem.image;
     [self.stackView addArrangedSubview:self.imageView];
     
