@@ -35,7 +35,11 @@ static CGSize const kImageSize = {.width=128, .height=128};
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
-    return [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+    KSOOnboardingImageBackgroundView *retval = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+    
+    retval.overlayColor = KDIColorWA(1.0, 0.85);
+    
+    return retval;
 }
 
 - (IBAction)_buttonAction:(id)sender {

@@ -15,8 +15,11 @@
 
 #import "KSOOnboardingImageBackgroundView.h"
 
+#import <Ditko/Ditko.h>
+
 @interface KSOOnboardingImageBackgroundView ()
 @property (strong,nonatomic) UIImageView *imageView;
+@property (strong,nonatomic) UIView *overlayView;
 @end
 
 @implementation KSOOnboardingImageBackgroundView
@@ -34,6 +37,26 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _imageView}]];
     
     return self;
+}
+
+- (void)setOverlayColor:(UIColor *)overlayColor {
+    _overlayColor = overlayColor;
+    
+    if (_overlayColor == nil) {
+        [self.overlayView removeFromSuperview];
+    }
+    else {
+        if (self.overlayView == nil) {
+            self.overlayView = [[UIView alloc] initWithFrame:CGRectZero];
+            self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self addSubview:self.overlayView];
+            
+            [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.overlayView}]];
+            [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.overlayView}]];
+        }
+        
+        self.overlayView.backgroundColor = _overlayColor;
+    }
 }
 
 @end

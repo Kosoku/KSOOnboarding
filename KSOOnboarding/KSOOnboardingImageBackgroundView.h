@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KSOOnboardingImageBackgroundView : UIView
 
+@property (strong,nonatomic,nullable) UIColor *overlayColor;
+
 - (instancetype)initWithImage:(UIImage *)image NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
