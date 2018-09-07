@@ -1,8 +1,8 @@
 //
-//  KSOOnboarding.h
-//  KSOOnboarding
+//  KSOOnboardingImageBackgroundView.m
+//  KSOOnboarding-iOS
 //
-//  Created by William Towe on 9/6/18.
+//  Created by William Towe on 9/7/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,17 +13,27 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <UIKit/UIKit.h>
+#import "KSOOnboardingImageBackgroundView.h"
 
-//! Project version number for KSOOnboarding.
-FOUNDATION_EXPORT double KSOOnboardingVersionNumber;
+@interface KSOOnboardingImageBackgroundView ()
+@property (strong,nonatomic) UIImageView *imageView;
+@end
 
-//! Project version string for KSOOnboarding.
-FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
+@implementation KSOOnboardingImageBackgroundView
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOOnboarding/PublicHeader.h>
+- (instancetype)initWithImage:(UIImage *)image {
+    if (!(self = [super initWithFrame:CGRectZero]))
+        return nil;
+    
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    _imageView.image = image;
+    [self addSubview:_imageView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _imageView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _imageView}]];
+    
+    return self;
+}
 
-#import <KSOOnboarding/KSOOnboardingItem.h>
-#import <KSOOnboarding/KSOOnboardingItemViewController.h>
-#import <KSOOnboarding/KSOOnboardingImageBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingViewController.h>
+@end

@@ -19,7 +19,6 @@
 #import <KSOOnboarding/KSOOnboarding.h>
 #import <Ditko/Ditko.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
-#import <Stanley/Stanley.h>
 
 static CGSize const kImageSize = {.width=128, .height=128};
 
