@@ -20,6 +20,7 @@
 
 @property (strong,nonatomic,nullable) UIBlurEffect *blurEffect;
 @property (strong,nonatomic,nullable) UIColor *overlayColor;
+@property (assign,nonatomic,getter=isMuted) BOOL muted;
 
 - (instancetype)initWithAsset:(AVAsset *)asset NS_DESIGNATED_INITIALIZER;
 

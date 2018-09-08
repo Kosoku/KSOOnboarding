@@ -24,7 +24,7 @@
 static CGSize const kImageSize = {.width=128, .height=128};
 
 @interface ViewController () <KSOOnboardingViewControllerDelegate>
-@property (strong,nonatomic) KSOOnboardingMovieBackgroundView *backgroundView;
+
 @end
 
 @implementation ViewController
@@ -32,8 +32,6 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
-    self.backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
@@ -44,7 +42,10 @@ static CGSize const kImageSize = {.width=128, .height=128};
 //
 //    return retval;
     
-    return self.backgroundView;
+    KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
+    backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    
+    return backgroundView;
 }
 
 - (IBAction)_buttonAction:(id)sender {

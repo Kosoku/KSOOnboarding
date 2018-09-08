@@ -19,23 +19,40 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+@interface KSOOnboardingMovieBackgroundContentView : UIView
+@property (readonly,nonatomic) AVPlayerLayer *layer;
+
+- (instancetype)initWithPlayer:(AVPlayer *)player;
+@end
+
+@implementation KSOOnboardingMovieBackgroundContentView
+- (instancetype)initWithPlayer:(AVPlayer *)player {
+    if (!(self = [super initWithFrame:CGRectZero]))
+        return nil;
+    
+    self.layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.layer.player = player;
+    
+    return self;
+}
+
++ (Class)layerClass {
+    return AVPlayerLayer.class;
+}
+
+@dynamic layer;
+
+@end
+
 @interface KSOOnboardingMovieBackgroundView ()
 @property (strong,nonatomic) AVPlayer *player;
+@property (strong,nonatomic) KSOOnboardingMovieBackgroundContentView *contentView;
 @property (strong,nonatomic) UIVisualEffectView *blurVisualEffectView;
 @property (strong,nonatomic) UIView *overlayView;
-
-@property (readonly,nonatomic) AVPlayerLayer *playerLayer;
 @end
 
 @implementation KSOOnboardingMovieBackgroundView
 
-- (void)didMoveToWindow {
-    [super didMoveToWindow];
-    
-    if (self.window != nil) {
-        [self.player play];
-    }
-}
 - (void)didAddSubview:(UIView *)subview {
     [super didAddSubview:subview];
     
@@ -44,20 +61,19 @@
     }
 }
 
-+ (Class)layerClass {
-    return AVPlayerLayer.class;
-}
-
 - (instancetype)initWithAsset:(AVAsset *)asset {
     if (!(self = [super initWithFrame:CGRectZero]))
         return nil;
     
     _player = [[AVPlayer alloc] initWithPlayerItem:[AVPlayerItem playerItemWithAsset:asset]];
     _player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-    _player.muted = YES;
     
-    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.playerLayer.player = _player;
+    _contentView = [[KSOOnboardingMovieBackgroundContentView alloc] initWithPlayer:_player];
+    _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_contentView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:_player.currentItem];
@@ -98,9 +114,11 @@
         self.overlayView.backgroundColor = _overlayColor;
     }
 }
-
-- (AVPlayerLayer *)playerLayer {
-    return (AVPlayerLayer *)self.layer;
+- (BOOL)isMuted {
+    return self.player.isMuted;
+}
+- (void)setMuted:(BOOL)muted {
+    self.player.muted = muted;
 }
 
 - (void)_didPlayToEndTime:(NSNotification *)note {
