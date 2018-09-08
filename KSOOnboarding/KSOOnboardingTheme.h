@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy,nonatomic,nullable) UIFontTextStyle bodyTextStyle;
 @property (copy,nonatomic,nullable) UIFontTextStyle actionTextStyle;
 
+@property (assign,nonatomic) CGFloat itemSubviewVerticalSpacing;
+
 /**
  The designated initializer.
  

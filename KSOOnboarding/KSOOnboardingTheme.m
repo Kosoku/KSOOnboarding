@@ -28,9 +28,6 @@
 @property (class,readonly,nonatomic) UIFont *defaultBodyFont;
 @property (class,readonly,nonatomic) UIFont *defaultActionFont;
 
-@property (class,readonly,nonatomic) UIFontTextStyle defaultHeadlineTextStyle;
-@property (class,readonly,nonatomic) UIFontTextStyle defaultBodyTextStyle;
-@property (class,readonly,nonatomic) UIFontTextStyle defaultActionTextStyle;
 @end
 
 @implementation KSOOnboardingTheme
@@ -59,6 +56,8 @@
     retval->_bodyTextStyle = _bodyTextStyle;
     retval->_actionTextStyle = _actionTextStyle;
     
+    retval->_itemSubviewVerticalSpacing = _itemSubviewVerticalSpacing;
+    
     return retval;
 }
 
@@ -76,9 +75,11 @@
     _bodyFont = KSOOnboardingTheme.defaultBodyFont;
     _actionFont = KSOOnboardingTheme.defaultActionFont;
     
-    _headlineTextStyle = KSOOnboardingTheme.defaultHeadlineTextStyle;
-    _bodyTextStyle = KSOOnboardingTheme.defaultBodyTextStyle;
-    _actionTextStyle = KSOOnboardingTheme.defaultActionTextStyle;
+    _headlineTextStyle = UIFontTextStyleHeadline;
+    _bodyTextStyle = UIFontTextStyleBody;
+    _actionTextStyle = UIFontTextStyleCallout;
+    
+    _itemSubviewVerticalSpacing = 20.0;
     
     return self;
 }
@@ -126,16 +127,6 @@ static void const *kDefaultThemeKey = &kDefaultThemeKey;
 }
 + (UIFont *)defaultActionFont {
     return [UIFont systemFontOfSize:15.0];
-}
-
-+ (UIFontTextStyle)defaultHeadlineTextStyle {
-    return UIFontTextStyleHeadline;
-}
-+ (UIFontTextStyle)defaultBodyTextStyle {
-    return UIFontTextStyleBody;
-}
-+ (UIFontTextStyle)defaultActionTextStyle {
-    return UIFontTextStyleCallout;
 }
 
 @end

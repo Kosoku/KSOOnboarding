@@ -45,7 +45,7 @@
     self.stackView.axis = UILayoutConstraintAxisVertical;
     self.stackView.alignment = UIStackViewAlignmentCenter;
     self.stackView.distribution = UIStackViewDistributionEqualSpacing;
-    self.stackView.spacing = 20.0;
+    self.stackView.spacing = self.onboardingTheme.itemSubviewVerticalSpacing;
     [self.view addSubview:self.stackView];
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -89,7 +89,7 @@
     [self.stackView addArrangedSubview:self.actionButton];
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": self.stackView}]];
-    [NSLayoutConstraint activateConstraints:@[[self.stackView.topAnchor constraintEqualToSystemSpacingBelowAnchor:self.view.safeAreaLayoutGuide.topAnchor multiplier:2.0], [self.view.safeAreaLayoutGuide.bottomAnchor constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:self.stackView.bottomAnchor multiplier:1.0]]];
+    [NSLayoutConstraint activateConstraints:@[[self.stackView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:self.onboardingTheme.itemSubviewVerticalSpacing], [self.view.safeAreaLayoutGuide.bottomAnchor constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:self.stackView.bottomAnchor multiplier:1.0]]];
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.headlineLabel}]];
     
