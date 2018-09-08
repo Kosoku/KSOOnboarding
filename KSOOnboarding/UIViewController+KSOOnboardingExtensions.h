@@ -1,8 +1,8 @@
 //
-//  KSOOnboarding.h
-//  KSOOnboarding
+//  UIViewController+KSOOnboardingExtensions.h
+//  KSOOnboarding-iOS
 //
-//  Created by William Towe on 9/6/18.
+//  Created by William Towe on 9/8/18.
 //  Copyright © 2018 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,18 +15,14 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOOnboarding.
-FOUNDATION_EXPORT double KSOOnboardingVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for KSOOnboarding.
-FOUNDATION_EXPORT const unsigned char KSOOnboardingVersionString[];
+@class KSOOnboardingViewController;
 
-// In this header, you should import all the public headers of your framework using statements like #import <KSOOnboarding/PublicHeader.h>
+@interface UIViewController (KSOOnboardingExtensions)
 
-#import <KSOOnboarding/KSOOnboardingTheme.h>
-#import <KSOOnboarding/KSOOnboardingItem.h>
-#import <KSOOnboarding/KSOOnboardingItemViewController.h>
-#import <KSOOnboarding/KSOOnboardingImageBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingMovieBackgroundView.h>
-#import <KSOOnboarding/KSOOnboardingViewController.h>
-#import <KSOOnboarding/UIViewController+KSOOnboardingExtensions.h>
+@property (readonly,nonatomic,nullable) KSOOnboardingViewController *KSO_onboardingViewController;
+
+@end
+
+NS_ASSUME_NONNULL_END

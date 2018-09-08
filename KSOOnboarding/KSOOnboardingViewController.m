@@ -15,7 +15,6 @@
 
 #import "KSOOnboardingViewController.h"
 #import "KSOOnboardingViewModel.h"
-#import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
 #import "KSOOnboardingTheme.h"
 
 #import <Ditko/Ditko.h>
@@ -187,7 +186,10 @@
     UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:onboardingItem];
     UIPageViewControllerNavigationDirection direction = index < currentIndex ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
     
+    kstWeakify(self);
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
+        kstStrongify(self);
+        
         [self _updatePageControlForOnboardingItem:onboardingItem];
         [self _updateDismissButtonForOnboardingItem:onboardingItem];
         

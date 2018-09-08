@@ -48,6 +48,8 @@
 		07A43D88214355560015F9ED /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D87214355560015F9ED /* Agamotto.framework */; };
 		07A43D8A2143555C0015F9ED /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D892143555C0015F9ED /* Agamotto.framework */; };
 		07A43D8B2143555C0015F9ED /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D892143555C0015F9ED /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07FD4C1C21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FD4C1A21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07FD4C1D21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FD4C1B21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +124,8 @@
 		07A43D7A214303F20015F9ED /* KSOOnboardingTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOOnboardingTheme.m; sourceTree = "<group>"; };
 		07A43D87214355560015F9ED /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D892143555C0015F9ED /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FD4C1A21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KSOOnboardingExtensions.h"; sourceTree = "<group>"; };
+		07FD4C1B21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KSOOnboardingExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,8 @@
 				07A43D62214228880015F9ED /* KSOOnboardingItemViewController.h */,
 				07A43D152141BB680015F9ED /* KSOOnboardingViewController.h */,
 				07A43D162141BB680015F9ED /* KSOOnboardingViewController.m */,
+				07FD4C1A21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h */,
+				07FD4C1B21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m */,
 				07A43D6F21425F780015F9ED /* KSOOnboardingImageBackgroundView.h */,
 				07A43D7021425F780015F9ED /* KSOOnboardingImageBackgroundView.m */,
 				07A43D732142F31B0015F9ED /* KSOOnboardingMovieBackgroundView.h */,
@@ -264,6 +270,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FD4C1C21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h in Headers */,
 				07A43D172141BB680015F9ED /* KSOOnboardingViewController.h in Headers */,
 				07A43D7B214303F20015F9ED /* KSOOnboardingTheme.h in Headers */,
 				07A43D63214228880015F9ED /* KSOOnboardingItemViewController.h in Headers */,
@@ -402,6 +409,7 @@
 				07A43D7221425F780015F9ED /* KSOOnboardingImageBackgroundView.m in Sources */,
 				07A43D182141BB680015F9ED /* KSOOnboardingViewController.m in Sources */,
 				07A43D612142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m in Sources */,
+				07FD4C1D21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m in Sources */,
 				07A43D7C214303F20015F9ED /* KSOOnboardingTheme.m in Sources */,
 				07A43D5821420DD10015F9ED /* KSOOnboardingItem.m in Sources */,
 			);

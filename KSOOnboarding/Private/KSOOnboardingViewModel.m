@@ -15,7 +15,6 @@
 
 #import "KSOOnboardingViewModel.h"
 #import "KSOOnboardingDefaultItemViewController.h"
-#import "KSOOnboardingItem+KSOOnboardingPrivateExtensions.h"
 #import "KSOOnboardingTheme.h"
 
 #import <Stanley/Stanley.h>
