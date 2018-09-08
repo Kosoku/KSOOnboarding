@@ -17,17 +17,18 @@
 #import "KSOOnboardingViewController.h"
 
 @class KSOOnboardingTheme;
+@protocol KSOOnboardingViewModelDelegate;
 
 @interface KSOOnboardingViewModel : NSObject
 
 @property (weak,nonatomic) id<KSOOnboardingViewControllerDataSource> dataSource;
 @property (weak,nonatomic) id<KSOOnboardingViewControllerDelegate> delegate;
 
+@property (weak,nonatomic) id<KSOOnboardingViewModelDelegate> viewModelDelegate;
+
 @property (strong,nonatomic) KSOOnboardingTheme *theme;
 
 @property (readonly,nonatomic) NSInteger numberOfOnboardingItems;
-
-- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController;
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index;
 - (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
@@ -35,4 +36,9 @@
 - (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 - (void)dismiss;
 
+@end
+
+@protocol KSOOnboardingViewModelDelegate <NSObject>
+@required
+- (KSOOnboardingViewController *)onboardingViewControllerForOnboardingViewModel:(KSOOnboardingViewModel *)viewModel;
 @end

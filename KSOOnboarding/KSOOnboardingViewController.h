@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic,null_resettable) KSOOnboardingTheme *theme;
 
-- (instancetype)initWithOnboardingItems:(NSArray<__kindof KSOOnboardingItem *> *)onboardingItems;
-
 @end
 
 @protocol KSOOnboardingViewControllerDataSource <NSObject>

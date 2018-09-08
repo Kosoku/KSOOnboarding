@@ -21,15 +21,13 @@
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
 
-@interface KSOOnboardingViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface KSOOnboardingViewController () <KSOOnboardingViewModelDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 @property (strong,nonatomic) KSOOnboardingViewModel *viewModel;
 
 @property (strong,nonatomic) UIView *backgroundView;
 @property (strong,nonatomic) UIPageViewController *pageViewController;
 @property (strong,nonatomic) UIPageControl *pageControl;
 @property (strong,nonatomic) UIButton *dismissButton;
-
-- (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems;
 @end
 
 @implementation KSOOnboardingViewController
@@ -42,7 +40,8 @@
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
     
-    [self _KSOOnboardingViewControllerInitWithOnboardingItems:nil];
+    _viewModel = [[KSOOnboardingViewModel alloc] init];
+    _viewModel.viewModelDelegate = self;
     
     return self;
 }
@@ -69,11 +68,6 @@
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
-    
-    UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:0]];
-    
-    [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
     [self addChildViewController:self.pageViewController];
     self.pageViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.pageViewController.view];
@@ -82,6 +76,10 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.pageViewController.view}]];
     
     [self.pageViewController didMoveToParentViewController:self];
+    
+    UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:0]];
+    
+    [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -112,10 +110,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    KSOOnboardingItem *onboardingItem = [(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem];
+    KSOOnboardingItem *onboardingItem = [self.viewModel onboardingItemAtIndex:0];
     
+    kstWeakify(onboardingItem);
     if (onboardingItem.viewDidAppearBlock != nil) {
-        onboardingItem.viewDidAppearBlock(onboardingItem);
+        onboardingItem.viewDidAppearBlock(kstweak_onboardingItem);
     }
 }
 
@@ -151,12 +150,7 @@
     }
 }
 
-- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems {
-    if (!(self = [super initWithNibName:nil bundle:nil]))
-        return nil;
-    
-    [self _KSOOnboardingViewControllerInitWithOnboardingItems:onboardingItems];
-    
+- (KSOOnboardingViewController *)onboardingViewControllerForOnboardingViewModel:(KSOOnboardingViewModel *)viewModel {
     return self;
 }
 
@@ -181,10 +175,6 @@
 }
 - (void)setTheme:(KSOOnboardingTheme *)theme {
     self.viewModel.theme = theme;
-}
-
-- (void)_KSOOnboardingViewControllerInitWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems; {
-    _viewModel = [[KSOOnboardingViewModel alloc] initWithOnboardingItems:onboardingItems onboardingViewController:self];
 }
 
 @end

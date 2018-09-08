@@ -50,7 +50,7 @@ KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBlock = @"viewDidApp
     return self;
 }
 
-+ (instancetype)onboardingItemModelWithDictionary:(NSDictionary<KSOOnboardingItemKey,id> *)dictionary {
++ (instancetype)onboardingItemWithDictionary:(NSDictionary<KSOOnboardingItemKey,id> *)dictionary {
     return [[self alloc] initWithDictionary:dictionary];
 }
 

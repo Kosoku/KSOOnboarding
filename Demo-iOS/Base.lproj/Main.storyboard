@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lj3-yR-Heb">
-                                <rect key="frame" x="161" y="318.5" width="53" height="30"/>
-                                <state key="normal" title="Present"/>
+                                <rect key="frame" x="119" y="318.5" width="138" height="30"/>
+                                <state key="normal" title="Present Onboarding"/>
                                 <connections>
                                     <action selector="_buttonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dn6-pj-A6b"/>
                                 </connections>

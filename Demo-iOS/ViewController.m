@@ -23,8 +23,8 @@
 
 static CGSize const kImageSize = {.width=128, .height=128};
 
-@interface ViewController () <KSOOnboardingViewControllerDelegate>
-
+@interface ViewController () <KSOOnboardingViewControllerDataSource, KSOOnboardingViewControllerDelegate>
+@property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
 @end
 
 @implementation ViewController
@@ -32,6 +32,13 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+}
+
+- (NSInteger)numberOfOnboardingItemsForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
+    return self.onboardingItems.count;
+}
+- (KSOOnboardingItem *)onboardingViewController:(__kindof KSOOnboardingViewController *)viewController onboardingItemAtIndex:(NSInteger)index {
+    return self.onboardingItems[index];
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
@@ -59,15 +66,18 @@ static CGSize const kImageSize = {.width=128, .height=128};
                               @"\uf5d1"];
     
     for (NSInteger i=0; i<5; i++) {
-        [temp addObject:[KSOOnboardingItem onboardingItemModelWithDictionary:@{KSOOnboardingItemKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage, KSOOnboardingItemKeyHeadline: LoremIpsum.title, KSOOnboardingItemKeyBody: [LoremIpsum sentencesWithNumber:2], KSOOnboardingItemKeyAction: LoremIpsum.word.localizedCapitalizedString, KSOOnboardingItemKeyActionBlock: ^(KSOOnboardingItem *item){
+        [temp addObject:[KSOOnboardingItem onboardingItemWithDictionary:@{KSOOnboardingItemKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage, KSOOnboardingItemKeyHeadline: LoremIpsum.title, KSOOnboardingItemKeyBody: [LoremIpsum sentencesWithNumber:2], KSOOnboardingItemKeyAction: LoremIpsum.word.localizedCapitalizedString, KSOOnboardingItemKeyActionBlock: ^(__weak KSOOnboardingItem *item){
             [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
-        }, KSOOnboardingItemKeyViewDidAppearBlock: ^(KSOOnboardingItem *item){
+        }, KSOOnboardingItemKeyViewDidAppearBlock: ^(__weak KSOOnboardingItem *item){
             [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
         }}]];
     }
     
-    KSOOnboardingViewController *viewController = [[KSOOnboardingViewController alloc] initWithOnboardingItems:temp];
+    self.onboardingItems = temp;
     
+    KSOOnboardingViewController *viewController = [[KSOOnboardingViewController alloc] initWithNibName:nil bundle:nil];
+    
+    viewController.dataSource = self;
     viewController.delegate = self;
     
     [self presentViewController:viewController animated:YES completion:nil];

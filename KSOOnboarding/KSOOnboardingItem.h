@@ -28,7 +28,7 @@ FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBl
 
 @class KSOOnboardingItem;
 
-typedef void(^KSOOnboardingItemBlock)(__kindof KSOOnboardingItem *item);
+typedef void(^KSOOnboardingItemBlock)(__weak __kindof KSOOnboardingItem *item);
 
 @interface KSOOnboardingItem : NSObject
 
@@ -44,7 +44,7 @@ typedef void(^KSOOnboardingItemBlock)(__kindof KSOOnboardingItem *item);
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-+ (instancetype)onboardingItemModelWithDictionary:(NSDictionary<KSOOnboardingItemKey, id> *)dictionary;
++ (instancetype)onboardingItemWithDictionary:(NSDictionary<KSOOnboardingItemKey, id> *)dictionary;
 
 @end
 

@@ -21,18 +21,14 @@
 #import <Stanley/Stanley.h>
 
 @interface KSOOnboardingViewModel ()
-@property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
-@property (weak,nonatomic) KSOOnboardingViewController *onboardingViewController;
+
 @end
 
 @implementation KSOOnboardingViewModel
 
-- (instancetype)initWithOnboardingItems:(NSArray<KSOOnboardingItem *> *)onboardingItems onboardingViewController:(KSOOnboardingViewController *)onboardingViewController {
+- (instancetype)init; {
     if (!(self = [super init]))
         return nil;
-    
-    _onboardingItems = [onboardingItems copy];
-    _onboardingViewController = onboardingViewController;
     
     _theme = KSOOnboardingTheme.defaultTheme;
     
@@ -40,14 +36,7 @@
 }
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index {
-    KSOOnboardingItem *retval = nil;
-    
-    if (KSTIsEmptyObject(self.onboardingItems)) {
-        retval = [self.dataSource onboardingViewController:self.onboardingViewController onboardingItemAtIndex:index];
-    }
-    else {
-        retval = self.onboardingItems[index];
-    }
+    KSOOnboardingItem *retval = [self.dataSource onboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self] onboardingItemAtIndex:index];
     
     retval.onboardingItemIndex = index;
     
@@ -57,7 +46,7 @@
     UIViewController<KSOOnboardingItemViewController> *retval = nil;
     
     if ([self.delegate respondsToSelector:@selector(onboardingViewController:viewControllerForOnboardingItem:)]) {
-        retval = [self.delegate onboardingViewController:self.onboardingViewController viewControllerForOnboardingItem:onboardingItem];
+        retval = [self.delegate onboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self] viewControllerForOnboardingItem:onboardingItem];
     }
     
     if (retval == nil) {
@@ -75,22 +64,18 @@
 
 - (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem; {
     if ([self.delegate respondsToSelector:@selector(onboardingViewController:canDismissForOnboardingItem:)]) {
-        return [self.delegate onboardingViewController:self.onboardingViewController canDismissForOnboardingItem:onboardingItem];
+        return [self.delegate onboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self] canDismissForOnboardingItem:onboardingItem];
     }
     return YES;
 }
 - (void)dismiss; {
-    kstWeakify(self);
-    
     if ([self.delegate respondsToSelector:@selector(onboardingViewControllerWillDismiss:)]) {
-        [self.delegate onboardingViewControllerWillDismiss:self.onboardingViewController];
+        [self.delegate onboardingViewControllerWillDismiss:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
     }
     
-    [self.onboardingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        kstStrongify(self);
-        
+    [[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self].presentingViewController dismissViewControllerAnimated:YES completion:^{
         if ([self.delegate respondsToSelector:@selector(onboardingViewControllerDidDismiss:)]) {
-            [self.delegate onboardingViewControllerDidDismiss:self.onboardingViewController];
+            [self.delegate onboardingViewControllerDidDismiss:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
         }
     }];
 }
@@ -100,12 +85,7 @@
 }
 
 - (NSInteger)numberOfOnboardingItems {
-    if (KSTIsEmptyObject(self.onboardingItems)) {
-        return [self.dataSource numberOfOnboardingItemsForOnboardingViewController:self.onboardingViewController];
-    }
-    else {
-        return self.onboardingItems.count;
-    }
+    return [self.dataSource numberOfOnboardingItemsForOnboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
 }
 
 @end
