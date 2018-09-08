@@ -44,8 +44,8 @@ KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBlock = @"viewDidApp
     _headline = dictionary[KSOOnboardingItemKeyHeadline];
     _body = dictionary[KSOOnboardingItemKeyBody];
     _action = dictionary[KSOOnboardingItemKeyAction];
-    _actionBlock = dictionary[KSOOnboardingItemKeyActionBlock];
-    _viewDidAppearBlock = dictionary[KSOOnboardingItemKeyViewDidAppearBlock];
+    _actionBlock = [dictionary[KSOOnboardingItemKeyActionBlock] copy];
+    _viewDidAppearBlock = [dictionary[KSOOnboardingItemKeyViewDidAppearBlock] copy];
     
     return self;
 }

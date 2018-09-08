@@ -112,9 +112,8 @@
     
     KSOOnboardingItem *onboardingItem = [self.viewModel onboardingItemAtIndex:0];
     
-    kstWeakify(onboardingItem);
     if (onboardingItem.viewDidAppearBlock != nil) {
-        onboardingItem.viewDidAppearBlock(kstweak_onboardingItem);
+        onboardingItem.viewDidAppearBlock(onboardingItem);
     }
 }
 
