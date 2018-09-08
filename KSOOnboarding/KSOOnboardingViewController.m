@@ -34,6 +34,10 @@
 
 @implementation KSOOnboardingViewController
 
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;

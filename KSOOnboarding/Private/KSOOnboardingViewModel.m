@@ -80,11 +80,15 @@
     return YES;
 }
 - (void)dismiss; {
+    kstWeakify(self);
+    
     if ([self.delegate respondsToSelector:@selector(onboardingViewControllerWillDismiss:)]) {
         [self.delegate onboardingViewControllerWillDismiss:self.onboardingViewController];
     }
     
     [self.onboardingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        kstStrongify(self);
+        
         if ([self.delegate respondsToSelector:@selector(onboardingViewControllerDidDismiss:)]) {
             [self.delegate onboardingViewControllerDidDismiss:self.onboardingViewController];
         }

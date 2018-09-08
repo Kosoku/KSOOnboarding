@@ -29,6 +29,10 @@
 
 @implementation KSOOnboardingDefaultItemViewController
 
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

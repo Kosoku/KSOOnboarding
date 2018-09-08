@@ -43,7 +43,9 @@ static CGSize const kImageSize = {.width=128, .height=128};
 //    return retval;
     
     KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
+    
     backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    backgroundView.muted = YES;
     
     return backgroundView;
 }

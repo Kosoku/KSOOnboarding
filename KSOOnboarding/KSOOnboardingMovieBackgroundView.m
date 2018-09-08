@@ -16,6 +16,7 @@
 #import "KSOOnboardingMovieBackgroundView.h"
 
 #import <Stanley/Stanley.h>
+#import <Agamotto/Agamotto.h>
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -30,8 +31,30 @@
     if (!(self = [super initWithFrame:CGRectZero]))
         return nil;
     
+    kstWeakify(self);
+    kstWeakify(player);
+    
+    self.alpha = 0.0;
+    
     self.layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.layer.player = player;
+    
+    [self.layer KAG_addObserverForKeyPath:@kstKeypath(self.layer,readyForDisplay) options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        kstStrongify(player);
+        
+        if (self.layer.isReadyForDisplay &&
+            self.alpha == 0.0) {
+            
+            [player play];
+            
+            [UIView animateWithDuration:0.33 animations:^{
+                kstStrongify(self);
+                
+                self.alpha = 1.0;
+            }];
+        }
+    }];
     
     return self;
 }
@@ -52,6 +75,10 @@
 @end
 
 @implementation KSOOnboardingMovieBackgroundView
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
 
 - (void)didAddSubview:(UIView *)subview {
     [super didAddSubview:subview];
@@ -122,10 +149,8 @@
 }
 
 - (void)_didPlayToEndTime:(NSNotification *)note {
-    KSTDispatchMainAsync(^{
-        [self.player seekToTime:kCMTimeZero];
-        [self.player play];
-    });
+    [self.player seekToTime:kCMTimeZero];
+    [self.player play];
 }
 
 @end
