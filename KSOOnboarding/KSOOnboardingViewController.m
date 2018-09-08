@@ -28,10 +28,15 @@
 @property (strong,nonatomic) UIPageViewController *pageViewController;
 @property (strong,nonatomic) UIPageControl *pageControl;
 @property (strong,nonatomic) UIButton *dismissButton;
+
+@property (readonly,nonatomic) KSOOnboardingItem *currentOnboardingItem;
+
+- (void)_updatePageControlForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
+- (void)_updateDismissButtonForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 @end
 
 @implementation KSOOnboardingViewController
-
+#pragma mark *** Subclass Overrides ***
 - (void)dealloc {
     KSTLogObject(self.class);
 }
@@ -45,7 +50,7 @@
     
     return self;
 }
-
+#pragma mark -
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -83,7 +88,6 @@
     
     self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:viewController.onboardingItem];
     self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
     self.dismissButton.tintColor = self.theme.actionColor;
     [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
@@ -91,6 +95,7 @@
         kstStrongify(self);
         [self.viewModel dismiss];
     } forControlEvents:UIControlEventTouchUpInside];
+    [self _updateDismissButtonForOnboardingItem:viewController.onboardingItem];
     [self.view addSubview:self.dismissButton];
     
     [NSLayoutConstraint activateConstraints:@[[self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToSystemSpacingBelowAnchor:self.dismissButton.bottomAnchor multiplier:1.0], [self.dismissButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
@@ -116,9 +121,13 @@
         onboardingItem.viewDidAppearBlock(onboardingItem);
     }
 }
-
+#pragma mark KSOOnboardingViewModelDelegate
+- (KSOOnboardingViewController *)onboardingViewControllerForOnboardingViewModel:(KSOOnboardingViewModel *)viewModel {
+    return self;
+}
+#pragma mark UIPageViewControllerDataSource
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    NSInteger index = [(id<KSOOnboardingItemViewController>)viewController onboardingItem].onboardingItemIndex;
+    NSInteger index = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)viewController onboardingItem]];
     
     if ((++index) >= self.viewModel.numberOfOnboardingItems) {
         return nil;
@@ -127,7 +136,7 @@
     return [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:index]];
 }
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    NSInteger index = [(id<KSOOnboardingItemViewController>)viewController onboardingItem].onboardingItemIndex;
+    NSInteger index = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)viewController onboardingItem]];
     
     if ((--index) < 0) {
         return nil;
@@ -135,24 +144,59 @@
     
     return [self.viewModel viewControllerForOnboardingItem:[self.viewModel onboardingItemAtIndex:index]];
 }
-
+#pragma mark UIPageViewControllerDelegate
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     if (completed) {
-        KSOOnboardingItem *onboardingItem = [(id<KSOOnboardingItemViewController>)pageViewController.viewControllers.firstObject onboardingItem];
+        KSOOnboardingItem *onboardingItem = self.currentOnboardingItem;
         
-        self.pageControl.currentPage = onboardingItem.onboardingItemIndex;
-        self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:onboardingItem];
+        [self _updatePageControlForOnboardingItem:onboardingItem];
+        [self _updateDismissButtonForOnboardingItem:onboardingItem];
         
         if (onboardingItem.viewDidAppearBlock != nil) {
             onboardingItem.viewDidAppearBlock(onboardingItem);
         }
     }
 }
-
-- (KSOOnboardingViewController *)onboardingViewControllerForOnboardingViewModel:(KSOOnboardingViewModel *)viewModel {
-    return self;
+#pragma mark *** Public Methods ***
+- (void)gotoNextOnboardingItemAnimated:(BOOL)animated; {
+    NSInteger index = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem]];
+    
+    if ((++index) >= self.viewModel.numberOfOnboardingItems) {
+        return;
+    }
+    
+    [self gotoOnboardingItem:[self.viewModel onboardingItemAtIndex:index] animated:animated];
 }
-
+- (void)gotoPreviousOnboardingItemAnimated:(BOOL)animated; {
+    NSInteger index = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem]];
+    
+    if ((--index) < 0) {
+        return;
+    }
+    
+    [self gotoOnboardingItem:[self.viewModel onboardingItemAtIndex:index] animated:animated];
+}
+- (void)gotoOnboardingItem:(KSOOnboardingItem *)onboardingItem animated:(BOOL)animated; {
+    NSInteger currentIndex = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem]];
+    NSInteger index = [self.viewModel indexOfOnboardingItem:onboardingItem];
+    
+    if (index == currentIndex) {
+        return;
+    }
+    
+    UIViewController<KSOOnboardingItemViewController> *viewController = [self.viewModel viewControllerForOnboardingItem:onboardingItem];
+    UIPageViewControllerNavigationDirection direction = index < currentIndex ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
+    
+    [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
+        [self _updatePageControlForOnboardingItem:onboardingItem];
+        [self _updateDismissButtonForOnboardingItem:onboardingItem];
+        
+        if (onboardingItem.viewDidAppearBlock != nil) {
+            onboardingItem.viewDidAppearBlock(onboardingItem);
+        }
+    }];
+}
+#pragma mark Properties
 @dynamic dataSource;
 - (id<KSOOnboardingViewControllerDataSource>)dataSource {
     return self.viewModel.dataSource;
@@ -167,13 +211,24 @@
 - (void)setDelegate:(id<KSOOnboardingViewControllerDelegate>)delegate {
     self.viewModel.delegate = delegate;
 }
-
+#pragma mark -
 @dynamic theme;
 - (KSOOnboardingTheme *)theme {
     return self.viewModel.theme;
 }
 - (void)setTheme:(KSOOnboardingTheme *)theme {
     self.viewModel.theme = theme;
+}
+#pragma mark *** Private Methods ***
+- (void)_updatePageControlForOnboardingItem:(KSOOnboardingItem *)onboardingItem; {
+    self.pageControl.currentPage = [self.viewModel indexOfOnboardingItem:onboardingItem];
+}
+- (void)_updateDismissButtonForOnboardingItem:(KSOOnboardingItem *)onboardingItem; {
+    self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:onboardingItem];
+}
+#pragma mark Properties
+- (KSOOnboardingItem *)currentOnboardingItem {
+    return [(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem];
 }
 
 @end

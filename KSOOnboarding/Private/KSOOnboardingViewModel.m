@@ -36,9 +36,19 @@
 }
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index {
-    KSOOnboardingItem *retval = [self.dataSource onboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self] onboardingItemAtIndex:index];
+    return [self.dataSource onboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self] onboardingItemAtIndex:index];
+}
+- (NSInteger)indexOfOnboardingItem:(KSOOnboardingItem *)onboardingItem {
+    NSInteger retval = NSNotFound;
     
-    retval.onboardingItemIndex = index;
+    for (NSInteger i=0; i<self.numberOfOnboardingItems; i++) {
+        KSOOnboardingItem *item = [self onboardingItemAtIndex:i];
+        
+        if ([item isEqual:onboardingItem]) {
+            retval = i;
+            break;
+        }
+    }
     
     return retval;
 }

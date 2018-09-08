@@ -31,7 +31,6 @@ KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBlock = @"viewDidApp
 @property (readwrite,copy,nonatomic) KSOOnboardingItemBlock actionBlock;
 @property (readwrite,copy,nonatomic) KSOOnboardingItemBlock viewDidAppearBlock;
 
-@property (assign,nonatomic) NSInteger onboardingItemIndex;
 @end
 
 @implementation KSOOnboardingItem

@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic,null_resettable) KSOOnboardingTheme *theme;
 
+- (void)gotoNextOnboardingItemAnimated:(BOOL)animated;
+- (void)gotoPreviousOnboardingItemAnimated:(BOOL)animated;
+- (void)gotoOnboardingItem:(__kindof KSOOnboardingItem *)onboardingItem animated:(BOOL)animated;
+
 @end
 
 @protocol KSOOnboardingViewControllerDataSource <NSObject>

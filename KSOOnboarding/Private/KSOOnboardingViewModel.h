@@ -31,6 +31,7 @@
 @property (readonly,nonatomic) NSInteger numberOfOnboardingItems;
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index;
+- (NSInteger)indexOfOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 - (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 
 - (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
