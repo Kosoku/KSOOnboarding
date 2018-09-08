@@ -88,20 +88,6 @@
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.bodyLabel}]];
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if (self.onboardingItem.viewWillAppearBlock != nil) {
-        self.onboardingItem.viewWillAppearBlock();
-    }
-}
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (self.onboardingItem.viewDidAppearBlock != nil) {
-        self.onboardingItem.viewDidAppearBlock();
-    }
-}
 
 @synthesize onboardingItem=_onboardingItem;
 @synthesize onboardingTheme=_onboardingTheme;

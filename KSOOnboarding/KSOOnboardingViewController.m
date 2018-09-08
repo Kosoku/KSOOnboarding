@@ -105,6 +105,15 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]-[bottom]" options:0 metrics:nil views:@{@"view": self.pageControl, @"bottom": self.dismissButton}]];
     [NSLayoutConstraint activateConstraints:@[[self.pageControl.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    KSOOnboardingItem *onboardingItem = [(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem];
+    
+    if (onboardingItem.viewDidAppearBlock != nil) {
+        onboardingItem.viewDidAppearBlock();
+    }
+}
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSInteger index = [(id<KSOOnboardingItemViewController>)viewController onboardingItem].onboardingItemIndex;
@@ -131,6 +140,10 @@
         
         self.pageControl.currentPage = onboardingItem.onboardingItemIndex;
         self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:onboardingItem];
+        
+        if (onboardingItem.viewDidAppearBlock != nil) {
+            onboardingItem.viewDidAppearBlock();
+        }
     }
 }
 

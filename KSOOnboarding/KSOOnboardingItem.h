@@ -26,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy,nonatomic,nullable) NSString *action;
 @property (copy,nonatomic,nullable) KSTVoidBlock actionBlock;
 
-@property (copy,nonatomic,nullable) KSTVoidBlock viewWillAppearBlock;
 @property (copy,nonatomic,nullable) KSTVoidBlock viewDidAppearBlock;
 
 - (instancetype)initWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSTVoidBlock)actionBlock NS_DESIGNATED_INITIALIZER;

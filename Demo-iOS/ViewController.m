@@ -56,9 +56,15 @@ static CGSize const kImageSize = {.width=128, .height=128};
                               @"\uf5d1"];
     
     for (NSInteger i=0; i<5; i++) {
-        [temp addObject:[KSOOnboardingItem onboardingItemModelWithImage:[UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage headline:LoremIpsum.title body:[LoremIpsum sentencesWithNumber:2] action:LoremIpsum.word.localizedCapitalizedString actionBlock:^{
+        KSOOnboardingItem *item = [KSOOnboardingItem onboardingItemModelWithImage:[UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage headline:LoremIpsum.title body:[LoremIpsum sentencesWithNumber:2] action:LoremIpsum.word.localizedCapitalizedString actionBlock:^{
             [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: LoremIpsum.sentence} completion:nil];
-        }]];
+        }];
+        
+        item.viewDidAppearBlock = ^{
+            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: LoremIpsum.sentence} completion:nil];
+        };
+        
+        [temp addObject:item];
     }
     
     KSOOnboardingViewController *viewController = [[KSOOnboardingViewController alloc] initWithOnboardingItems:temp];
