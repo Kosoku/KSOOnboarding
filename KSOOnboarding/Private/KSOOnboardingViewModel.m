@@ -77,14 +77,18 @@
     }
     return YES;
 }
-- (void)dismiss; {
+- (void)dismissAnimated:(BOOL)animated completion:(KSTVoidBlock)completion; {
     if ([self.delegate respondsToSelector:@selector(onboardingViewControllerWillDismiss:)]) {
         [self.delegate onboardingViewControllerWillDismiss:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
     }
     
-    [[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self].presentingViewController dismissViewControllerAnimated:YES completion:^{
+    [[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self].presentingViewController dismissViewControllerAnimated:animated completion:^{
         if ([self.delegate respondsToSelector:@selector(onboardingViewControllerDidDismiss:)]) {
             [self.delegate onboardingViewControllerDidDismiss:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
+        }
+        
+        if (completion != nil) {
+            completion();
         }
     }];
 }

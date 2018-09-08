@@ -35,7 +35,7 @@
 - (UIViewController<KSOOnboardingItemViewController> *)viewControllerForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
 
 - (BOOL)canDismissForOnboardingItem:(KSOOnboardingItem *)onboardingItem;
-- (void)dismiss;
+- (void)dismissAnimated:(BOOL)animated completion:(KSTVoidBlock)completion;
 
 @end
 

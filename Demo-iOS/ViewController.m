@@ -25,7 +25,7 @@ static CGSize const kImageSize = {.width=128, .height=128};
 
 @interface ViewController () <KSOOnboardingViewControllerDataSource, KSOOnboardingViewControllerDelegate>
 @property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
-@property (strong,nonatomic) AVAsset *asset;
+@property (weak,nonatomic) KSOOnboardingViewController *onboardingViewController;
 @end
 
 @implementation ViewController
@@ -43,13 +43,6 @@ static CGSize const kImageSize = {.width=128, .height=128};
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
-//    KSOOnboardingImageBackgroundView *retval = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
-//
-//    retval.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//    retval.overlayColor = KDIColorWA(1.0, 0.25);
-//
-//    return retval;
-    
     KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
     
     backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -68,9 +61,18 @@ static CGSize const kImageSize = {.width=128, .height=128};
     
     for (NSInteger i=0; i<5; i++) {
         [temp addObject:[KSOOnboardingItem onboardingItemWithDictionary:@{KSOOnboardingItemKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage, KSOOnboardingItemKeyHeadline: LoremIpsum.title, KSOOnboardingItemKeyBody: [LoremIpsum sentencesWithNumber:2], KSOOnboardingItemKeyAction: LoremIpsum.word.localizedCapitalizedString, KSOOnboardingItemKeyActionBlock: ^(KSOOnboardingItem *item){
-            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
+            if (i == 4) {
+                [self.onboardingViewController dismissOnboardingViewControllerAnimated:YES completion:nil];
+            }
+            else {
+                [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:^(__kindof UIAlertController * _Nonnull alertController, NSInteger buttonIndex) {
+                    [self.onboardingViewController gotoNextOnboardingItemAnimated:YES];
+                }];
+            }
         }, KSOOnboardingItemKeyViewDidAppearBlock: ^(KSOOnboardingItem *item){
-            [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
+            if (i % 2 == 0) {
+                [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
+            }
         }}]];
     }
     
@@ -80,6 +82,8 @@ static CGSize const kImageSize = {.width=128, .height=128};
     
     viewController.dataSource = self;
     viewController.delegate = self;
+    
+    self.onboardingViewController = viewController;
     
     [self presentViewController:viewController animated:YES completion:nil];
 }

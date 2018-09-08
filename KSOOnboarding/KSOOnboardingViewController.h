@@ -16,6 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <KSOOnboarding/KSOOnboardingItem.h>
 #import <KSOOnboarding/KSOOnboardingItemViewController.h>
+#import <Stanley/KSTDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak,nonatomic,nullable) id<KSOOnboardingViewControllerDelegate> delegate;
 
 @property (strong,nonatomic,null_resettable) KSOOnboardingTheme *theme;
+
+- (void)dismissOnboardingViewControllerAnimated:(BOOL)animated completion:(nullable KSTVoidBlock)completion;
 
 - (void)gotoNextOnboardingItemAnimated:(BOOL)animated;
 - (void)gotoPreviousOnboardingItemAnimated:(BOOL)animated;

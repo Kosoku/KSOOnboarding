@@ -92,7 +92,7 @@
     [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
     [self.dismissButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
-        [self.viewModel dismiss];
+        [self.viewModel dismissAnimated:YES completion:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     [self _updateDismissButtonForOnboardingItem:viewController.onboardingItem];
     [self.view addSubview:self.dismissButton];
@@ -157,6 +157,10 @@
     }
 }
 #pragma mark *** Public Methods ***
+- (void)dismissOnboardingViewControllerAnimated:(BOOL)animated completion:(KSTVoidBlock)completion {
+    [self.viewModel dismissAnimated:animated completion:completion];
+}
+#pragma mark -
 - (void)gotoNextOnboardingItemAnimated:(BOOL)animated; {
     NSInteger index = [self.viewModel indexOfOnboardingItem:[(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem]];
     
