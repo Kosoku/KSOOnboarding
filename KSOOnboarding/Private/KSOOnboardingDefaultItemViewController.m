@@ -54,7 +54,8 @@
     self.headlineLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.headlineLabel.numberOfLines = 0;
     self.headlineLabel.textAlignment = NSTextAlignmentCenter;
-    self.headlineLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleHeadline;
+    self.headlineLabel.font = self.onboardingTheme.headlineFont;
+    self.headlineLabel.KDI_dynamicTypeTextStyle = self.onboardingTheme.headlineTextStyle;
     self.headlineLabel.textColor = self.onboardingTheme.headlineColor;
     self.headlineLabel.text = self.onboardingItem.headline;
     [self.stackView addArrangedSubview:self.headlineLabel];
@@ -63,7 +64,8 @@
     self.bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.bodyLabel.numberOfLines = 0;
     self.bodyLabel.textAlignment = NSTextAlignmentCenter;
-    self.bodyLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleBody;
+    self.bodyLabel.font = self.onboardingTheme.bodyFont;
+    self.bodyLabel.KDI_dynamicTypeTextStyle = self.onboardingTheme.bodyTextStyle;
     self.bodyLabel.textColor = self.onboardingTheme.bodyColor;
     self.bodyLabel.text = self.onboardingItem.body;
     [self.stackView addArrangedSubview:self.bodyLabel];
@@ -71,7 +73,8 @@
     self.actionButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.actionButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.actionButton.tintColor = self.onboardingTheme.actionColor;
-    self.actionButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
+    self.actionButton.titleLabel.font = self.onboardingTheme.actionFont;
+    self.actionButton.titleLabel.KDI_dynamicTypeTextStyle = self.onboardingTheme.actionTextStyle;
     [self.actionButton setTitle:self.onboardingItem.action forState:UIControlStateNormal];
     [self.actionButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);

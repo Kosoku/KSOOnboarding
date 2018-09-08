@@ -34,6 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,null_resettable) UIColor *bodyColor;
 @property (strong,nonatomic,nullable) UIColor *actionColor;
 
+@property (strong,nonatomic,null_resettable) UIFont *headlineFont;
+@property (strong,nonatomic,null_resettable) UIFont *bodyFont;
+@property (strong,nonatomic,null_resettable) UIFont *actionFont;
+
+@property (copy,nonatomic,nullable) UIFontTextStyle headlineTextStyle;
+@property (copy,nonatomic,nullable) UIFontTextStyle bodyTextStyle;
+@property (copy,nonatomic,nullable) UIFontTextStyle actionTextStyle;
+
 /**
  The designated initializer.
  

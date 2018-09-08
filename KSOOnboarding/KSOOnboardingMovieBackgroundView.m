@@ -15,6 +15,8 @@
 
 #import "KSOOnboardingMovieBackgroundView.h"
 
+#import <Stanley/Stanley.h>
+
 #import <AVFoundation/AVFoundation.h>
 
 @interface KSOOnboardingMovieBackgroundView ()
@@ -102,8 +104,10 @@
 }
 
 - (void)_didPlayToEndTime:(NSNotification *)note {
-    [self.player seekToTime:kCMTimeZero];
-    [self.player play];
+    KSTDispatchMainAsync(^{
+        [self.player seekToTime:kCMTimeZero];
+        [self.player play];
+    });
 }
 
 @end

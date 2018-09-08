@@ -23,6 +23,14 @@
 @property (class,readonly,nonatomic) UIColor *defaultImageColor;
 @property (class,readonly,nonatomic) UIColor *defaultHeadlineColor;
 @property (class,readonly,nonatomic) UIColor *defaultBodyColor;
+
+@property (class,readonly,nonatomic) UIFont *defaultHeadlineFont;
+@property (class,readonly,nonatomic) UIFont *defaultBodyFont;
+@property (class,readonly,nonatomic) UIFont *defaultActionFont;
+
+@property (class,readonly,nonatomic) UIFontTextStyle defaultHeadlineTextStyle;
+@property (class,readonly,nonatomic) UIFontTextStyle defaultBodyTextStyle;
+@property (class,readonly,nonatomic) UIFontTextStyle defaultActionTextStyle;
 @end
 
 @implementation KSOOnboardingTheme
@@ -43,6 +51,14 @@
     retval->_bodyColor = _bodyColor;
     retval->_actionColor = _actionColor;
     
+    retval->_headlineFont = _headlineFont;
+    retval->_bodyFont = _bodyFont;
+    retval->_actionFont = _actionFont;
+    
+    retval->_headlineTextStyle = _headlineTextStyle;
+    retval->_bodyTextStyle = _bodyTextStyle;
+    retval->_actionTextStyle = _actionTextStyle;
+    
     return retval;
 }
 
@@ -55,6 +71,14 @@
     _imageColor = KSOOnboardingTheme.defaultImageColor;
     _headlineColor = KSOOnboardingTheme.defaultHeadlineColor;
     _bodyColor = KSOOnboardingTheme.defaultBodyColor;
+    
+    _headlineFont = KSOOnboardingTheme.defaultHeadlineFont;
+    _bodyFont = KSOOnboardingTheme.defaultBodyFont;
+    _actionFont = KSOOnboardingTheme.defaultActionFont;
+    
+    _headlineTextStyle = KSOOnboardingTheme.defaultHeadlineTextStyle;
+    _bodyTextStyle = KSOOnboardingTheme.defaultBodyTextStyle;
+    _actionTextStyle = KSOOnboardingTheme.defaultActionTextStyle;
     
     return self;
 }
@@ -74,6 +98,16 @@ static void const *kDefaultThemeKey = &kDefaultThemeKey;
     _bodyColor = bodyColor ?: KSOOnboardingTheme.defaultBodyColor;
 }
 
+- (void)setHeadlineFont:(UIFont *)headlineFont {
+    _headlineFont = headlineFont ?: KSOOnboardingTheme.defaultHeadlineFont;
+}
+- (void)setBodyFont:(UIFont *)bodyFont {
+    _bodyFont = bodyFont ?: KSOOnboardingTheme.defaultBodyFont;
+}
+- (void)setActionFont:(UIFont *)actionFont {
+    _actionFont = actionFont ?: KSOOnboardingTheme.defaultActionFont;
+}
+
 + (UIColor *)defaultImageColor {
     return UIColor.blackColor;
 }
@@ -82,6 +116,26 @@ static void const *kDefaultThemeKey = &kDefaultThemeKey;
 }
 + (UIColor *)defaultBodyColor {
     return KDIColorW(0.1);
+}
+
++ (UIFont *)defaultHeadlineFont {
+    return [UIFont boldSystemFontOfSize:17.0];
+}
++ (UIFont *)defaultBodyFont {
+    return [UIFont systemFontOfSize:17.0];
+}
++ (UIFont *)defaultActionFont {
+    return [UIFont systemFontOfSize:15.0];
+}
+
++ (UIFontTextStyle)defaultHeadlineTextStyle {
+    return UIFontTextStyleHeadline;
+}
++ (UIFontTextStyle)defaultBodyTextStyle {
+    return UIFontTextStyleBody;
+}
++ (UIFontTextStyle)defaultActionTextStyle {
+    return UIFontTextStyleCallout;
 }
 
 @end
