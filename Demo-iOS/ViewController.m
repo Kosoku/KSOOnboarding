@@ -67,9 +67,9 @@ static CGSize const kImageSize = {.width=128, .height=128};
                               @"\uf5d1"];
     
     for (NSInteger i=0; i<5; i++) {
-        [temp addObject:[KSOOnboardingItem onboardingItemWithDictionary:@{KSOOnboardingItemKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage, KSOOnboardingItemKeyHeadline: LoremIpsum.title, KSOOnboardingItemKeyBody: [LoremIpsum sentencesWithNumber:2], KSOOnboardingItemKeyAction: LoremIpsum.word.localizedCapitalizedString, KSOOnboardingItemKeyActionBlock: ^(__weak KSOOnboardingItem *item){
+        [temp addObject:[KSOOnboardingItem onboardingItemWithDictionary:@{KSOOnboardingItemKeyImage: [UIImage KSO_fontAwesomeSolidImageWithString:imageStrings[i] size:kImageSize].KDI_templateImage, KSOOnboardingItemKeyHeadline: LoremIpsum.title, KSOOnboardingItemKeyBody: [LoremIpsum sentencesWithNumber:2], KSOOnboardingItemKeyAction: LoremIpsum.word.localizedCapitalizedString, KSOOnboardingItemKeyActionBlock: ^(KSOOnboardingItem *item){
             [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
-        }, KSOOnboardingItemKeyViewDidAppearBlock: ^(__weak KSOOnboardingItem *item){
+        }, KSOOnboardingItemKeyViewDidAppearBlock: ^(KSOOnboardingItem *item){
             [UIAlertController KDI_presentAlertControllerWithOptions:@{KDIUIAlertControllerOptionsKeyTitle: LoremIpsum.word.localizedCapitalizedString, KDIUIAlertControllerOptionsKeyMessage: item.headline} completion:nil];
         }}]];
     }

@@ -29,7 +29,7 @@ FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBl
 
 @class KSOOnboardingItem;
 
-typedef void(^KSOOnboardingItemBlock)(__weak __kindof KSOOnboardingItem *item);
+typedef void(^KSOOnboardingItemBlock)(__kindof KSOOnboardingItem *item);
 
 @interface KSOOnboardingItem : NSObject
 
