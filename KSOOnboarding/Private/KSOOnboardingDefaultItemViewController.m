@@ -83,7 +83,7 @@
     [self.actionButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
         if (self.onboardingItem.actionBlock != nil) {
-            self.onboardingItem.actionBlock();
+            self.onboardingItem.actionBlock(self.onboardingItem);
         }
     } forControlEvents:UIControlEventTouchUpInside];
     [self.stackView addArrangedSubview:self.actionButton];

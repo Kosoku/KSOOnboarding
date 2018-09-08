@@ -115,7 +115,7 @@
     KSOOnboardingItem *onboardingItem = [(id<KSOOnboardingItemViewController>)self.pageViewController.viewControllers.firstObject onboardingItem];
     
     if (onboardingItem.viewDidAppearBlock != nil) {
-        onboardingItem.viewDidAppearBlock();
+        onboardingItem.viewDidAppearBlock(onboardingItem);
     }
 }
 
@@ -146,7 +146,7 @@
         self.dismissButton.enabled = [self.viewModel canDismissForOnboardingItem:onboardingItem];
         
         if (onboardingItem.viewDidAppearBlock != nil) {
-            onboardingItem.viewDidAppearBlock();
+            onboardingItem.viewDidAppearBlock(onboardingItem);
         }
     }
 }

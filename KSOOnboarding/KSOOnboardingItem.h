@@ -14,26 +14,37 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
-#import <Stanley/KSTDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString* KSOOnboardingItemKey NS_STRING_ENUM;
+
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyImage;
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyHeadline;
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyBody;
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyAction;
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyActionBlock;
+FOUNDATION_EXTERN KSOOnboardingItemKey const KSOOnboardingItemKeyViewDidAppearBlock;
+
+@class KSOOnboardingItem;
+
+typedef void(^KSOOnboardingItemBlock)(__kindof KSOOnboardingItem *item);
+
 @interface KSOOnboardingItem : NSObject
 
-@property (strong,nonatomic,nullable) UIImage *image;
-@property (copy,nonatomic,nullable) NSString *headline;
-@property (copy,nonatomic,nullable) NSString *body;
-@property (copy,nonatomic,nullable) NSString *action;
-@property (copy,nonatomic,nullable) KSTVoidBlock actionBlock;
+@property (readonly,strong,nonatomic,nullable) UIImage *image;
+@property (readonly,copy,nonatomic,nullable) NSString *headline;
+@property (readonly,copy,nonatomic,nullable) NSString *body;
+@property (readonly,copy,nonatomic,nullable) NSString *action;
+@property (readonly,copy,nonatomic,nullable) KSOOnboardingItemBlock actionBlock;
+@property (readonly,copy,nonatomic,nullable) KSOOnboardingItemBlock viewDidAppearBlock;
 
-@property (copy,nonatomic,nullable) KSTVoidBlock viewDidAppearBlock;
-
-- (instancetype)initWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSTVoidBlock)actionBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDictionary:(NSDictionary<KSOOnboardingItemKey, id> *)dictionary NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-+ (instancetype)onboardingItemModelWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSTVoidBlock)actionBlock;
++ (instancetype)onboardingItemModelWithDictionary:(NSDictionary<KSOOnboardingItemKey, id> *)dictionary;
 
 @end
 
