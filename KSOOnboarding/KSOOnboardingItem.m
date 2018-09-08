@@ -22,7 +22,7 @@
 
 @implementation KSOOnboardingItem
 
-- (instancetype)initWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
+- (instancetype)initWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSTVoidBlock)actionBlock {
     if (!(self = [super init]))
         return nil;
     
@@ -35,7 +35,7 @@
     return self;
 }
 
-+ (instancetype)onboardingItemModelWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSOOnboardingItemActionBlock)actionBlock {
++ (instancetype)onboardingItemModelWithImage:(UIImage *)image headline:(NSString *)headline body:(NSString *)body action:(NSString *)action actionBlock:(KSTVoidBlock)actionBlock {
     return [[self alloc] initWithImage:image headline:headline body:body action:action actionBlock:actionBlock];
 }
 

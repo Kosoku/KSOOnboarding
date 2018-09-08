@@ -18,22 +18,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef KSTVoidBlock KSOOnboardingItemActionBlock;
-
 @interface KSOOnboardingItem : NSObject
 
 @property (strong,nonatomic,nullable) UIImage *image;
 @property (copy,nonatomic,nullable) NSString *headline;
 @property (copy,nonatomic,nullable) NSString *body;
 @property (copy,nonatomic,nullable) NSString *action;
-@property (copy,nonatomic,nullable) KSOOnboardingItemActionBlock actionBlock;
+@property (copy,nonatomic,nullable) KSTVoidBlock actionBlock;
 
-- (instancetype)initWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock NS_DESIGNATED_INITIALIZER;
+@property (copy,nonatomic,nullable) KSTVoidBlock viewWillAppearBlock;
+@property (copy,nonatomic,nullable) KSTVoidBlock viewDidAppearBlock;
+
+- (instancetype)initWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSTVoidBlock)actionBlock NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-+ (instancetype)onboardingItemModelWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSOOnboardingItemActionBlock)actionBlock;
++ (instancetype)onboardingItemModelWithImage:(nullable UIImage *)image headline:(nullable NSString *)headline body:(nullable NSString *)body action:(nullable NSString *)action actionBlock:(nullable KSTVoidBlock)actionBlock;
 
 @end
 
