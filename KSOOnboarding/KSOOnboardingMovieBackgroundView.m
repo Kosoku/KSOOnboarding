@@ -84,10 +84,6 @@
 
 @implementation KSOOnboardingMovieBackgroundView
 
-- (void)dealloc {
-    [NSNotificationCenter.defaultCenter removeObserver:self];
-}
-
 - (void)didAddSubview:(UIView *)subview {
     [super didAddSubview:subview];
     
@@ -100,6 +96,8 @@
     if (!(self = [super initWithFrame:CGRectZero]))
         return nil;
     
+    kstWeakify(self);
+    
     _player = [[AVPlayer alloc] initWithPlayerItem:[[AVPlayerItem alloc] initWithAsset:asset]];
     [_player play];
     
@@ -110,8 +108,16 @@
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
     
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_didPlayToEndTime:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:_player.currentItem];
+    [self KAG_addObserverForNotificationNames:@[AVPlayerItemDidPlayToEndTimeNotification, AVPlayerItemFailedToPlayToEndTimeNotification] object:_player.currentItem block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self)
+        [self.player seekToTime:kCMTimeZero];
+        [self.player play];;
+    }];
+    
+    [self KAG_addObserverForNotificationNames:@[UIApplicationDidBecomeActiveNotification] object:nil block:^(NSNotification * _Nonnull notification) {
+        kstStrongify(self);
+        [self.player play];
+    }];
     
     return self;
 }
@@ -154,11 +160,6 @@
 }
 - (void)setMuted:(BOOL)muted {
     self.player.muted = muted;
-}
-
-- (void)_didPlayToEndTime:(NSNotification *)note {
-    [self.player seekToTime:kCMTimeZero];
-    [self.player play];
 }
 
 @end
