@@ -33,7 +33,6 @@
         return nil;
     
     kstWeakify(self);
-    kstWeakify(player);
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -49,12 +48,9 @@
     
     [self.layer KAG_addObserverForKeyPath:@kstKeypath(self.layer,readyForDisplay) options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        kstStrongify(player);
 
         if (self.layer.isReadyForDisplay) {
             self.imageView.image = nil;
-            
-            [player play];
         }
     }];
     
@@ -105,6 +101,7 @@
         return nil;
     
     _player = [[AVPlayer alloc] initWithPlayerItem:[[AVPlayerItem alloc] initWithAsset:asset]];
+    [_player play];
     
     _contentView = [[KSOOnboardingMovieBackgroundContentView alloc] initWithPlayer:_player];
     _contentView.translatesAutoresizingMaskIntoConstraints = NO;
