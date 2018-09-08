@@ -22,6 +22,7 @@
 
 @interface KSOOnboardingMovieBackgroundContentView : UIView
 @property (readonly,nonatomic) AVPlayerLayer *layer;
+@property (strong,nonatomic) UIImageView *imageView;
 
 - (instancetype)initWithPlayer:(AVPlayer *)player;
 @end
@@ -34,7 +35,14 @@
     kstWeakify(self);
     kstWeakify(player);
     
-    self.alpha = 0.0;
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.clipsToBounds = YES;
+    [self addSubview:self.imageView];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.imageView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.imageView}]];
     
     self.layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.layer.player = player;
@@ -42,19 +50,23 @@
     [self.layer KAG_addObserverForKeyPath:@kstKeypath(self.layer,readyForDisplay) options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         kstStrongify(player);
-        
-        if (self.layer.isReadyForDisplay &&
-            self.alpha == 0.0) {
+
+        if (self.layer.isReadyForDisplay) {
+            self.imageView.image = nil;
             
             [player play];
-            
-            [UIView animateWithDuration:0.33 animations:^{
-                kstStrongify(self);
-                
-                self.alpha = 1.0;
-            }];
         }
     }];
+    
+    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:player.currentItem.asset];
+    
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:kCMTimeZero actualTime:NULL error:NULL];
+    
+    self.imageView.image = [[UIImage alloc] initWithCGImage:imageRef];
+    
+    CGImageRelease(imageRef);
     
     return self;
 }
@@ -92,13 +104,12 @@
     if (!(self = [super initWithFrame:CGRectZero]))
         return nil;
     
-    _player = [[AVPlayer alloc] initWithPlayerItem:[AVPlayerItem playerItemWithAsset:asset]];
-    _player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+    _player = [[AVPlayer alloc] initWithPlayerItem:[[AVPlayerItem alloc] initWithAsset:asset]];
     
     _contentView = [[KSOOnboardingMovieBackgroundContentView alloc] initWithPlayer:_player];
     _contentView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_contentView];
-    
+
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _contentView}]];
     

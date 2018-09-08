@@ -25,6 +25,7 @@ static CGSize const kImageSize = {.width=128, .height=128};
 
 @interface ViewController () <KSOOnboardingViewControllerDataSource, KSOOnboardingViewControllerDelegate>
 @property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
+@property (strong,nonatomic) AVAsset *asset;
 @end
 
 @implementation ViewController
