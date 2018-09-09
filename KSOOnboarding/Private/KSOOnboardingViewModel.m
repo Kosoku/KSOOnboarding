@@ -20,7 +20,7 @@
 #import <Stanley/Stanley.h>
 
 @interface KSOOnboardingViewModel ()
-
+@property (class,readonly,nonatomic) NSString *defaultDismissButtonTitle;
 @end
 
 @implementation KSOOnboardingViewModel
@@ -30,6 +30,7 @@
         return nil;
     
     _theme = KSOOnboardingTheme.defaultTheme;
+    _dismissButtonTitle = KSOOnboardingViewModel.defaultDismissButtonTitle;
     
     return self;
 }
@@ -97,8 +98,16 @@
     _theme = theme ?: KSOOnboardingTheme.defaultTheme;
 }
 
+- (void)setDismissButtonTitle:(NSString *)dismissButtonTitle {
+    _dismissButtonTitle = dismissButtonTitle ?: KSOOnboardingViewModel.defaultDismissButtonTitle;
+}
+
 - (NSInteger)numberOfOnboardingItems {
     return [self.dataSource numberOfOnboardingItemsForOnboardingViewController:[self.viewModelDelegate onboardingViewControllerForOnboardingViewModel:self]];
+}
+
++ (NSString *)defaultDismissButtonTitle {
+    return @"Dismiss";
 }
 
 @end

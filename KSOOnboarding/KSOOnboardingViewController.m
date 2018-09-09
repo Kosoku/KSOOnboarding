@@ -19,6 +19,7 @@
 
 #import <Ditko/Ditko.h>
 #import <Stanley/Stanley.h>
+#import <Agamotto/Agamotto.h>
 
 @interface KSOOnboardingViewController () <KSOOnboardingViewModelDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 @property (strong,nonatomic) KSOOnboardingViewModel *viewModel;
@@ -87,9 +88,10 @@
     
     self.dismissButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.dismissButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = UIFontTextStyleCallout;
+    self.dismissButton.titleLabel.font = self.theme.actionFont;
+    self.dismissButton.titleLabel.KDI_dynamicTypeTextStyle = self.theme.actionTextStyle;
     self.dismissButton.tintColor = self.theme.actionColor;
-    [self.dismissButton setTitle:@"Dismiss" forState:UIControlStateNormal];
+    [self.dismissButton setTitle:self.dismissButtonTitle forState:UIControlStateNormal];
     [self.dismissButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         kstStrongify(self);
         [self.viewModel dismissAnimated:YES completion:nil];
@@ -110,6 +112,13 @@
     
     [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]-[bottom]" options:0 metrics:nil views:@{@"view": self.pageControl, @"bottom": self.dismissButton}]];
     [NSLayoutConstraint activateConstraints:@[[self.pageControl.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor]]];
+    
+    [self.viewModel KAG_addObserverForKeyPaths:@[@kstKeypath(self.viewModel,dismissButtonTitle)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if ([keyPath isEqualToString:@kstKeypath(self.viewModel,dismissButtonTitle)]) {
+            [self.dismissButton setTitle:self.dismissButtonTitle forState:UIControlStateNormal];
+        }
+    }];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -224,6 +233,14 @@
 }
 - (void)setTheme:(KSOOnboardingTheme *)theme {
     self.viewModel.theme = theme;
+}
+#pragma mark -
+@dynamic dismissButtonTitle;
+- (NSString *)dismissButtonTitle {
+    return self.viewModel.dismissButtonTitle;
+}
+- (void)setDismissButtonTitle:(NSString *)dismissButtonTitle {
+    self.viewModel.dismissButtonTitle = dismissButtonTitle;
 }
 #pragma mark *** Private Methods ***
 - (void)_updatePageControlForOnboardingItem:(KSOOnboardingItem *)onboardingItem; {

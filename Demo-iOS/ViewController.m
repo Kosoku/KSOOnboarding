@@ -45,7 +45,7 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
     KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
     
-    backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
     backgroundView.muted = YES;
     
     return backgroundView;
@@ -82,6 +82,7 @@ static CGSize const kImageSize = {.width=128, .height=128};
     
     viewController.dataSource = self;
     viewController.delegate = self;
+    viewController.dismissButtonTitle = @"Skip";
     
     self.onboardingViewController = viewController;
     

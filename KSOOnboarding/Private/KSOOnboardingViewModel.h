@@ -28,6 +28,8 @@
 
 @property (strong,nonatomic) KSOOnboardingTheme *theme;
 
+@property (copy,nonatomic) NSString *dismissButtonTitle;
+
 @property (readonly,nonatomic) NSInteger numberOfOnboardingItems;
 
 - (KSOOnboardingItem *)onboardingItemAtIndex:(NSInteger)index;

@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic,null_resettable) KSOOnboardingTheme *theme;
 
+@property (copy,nonatomic,null_resettable) NSString *dismissButtonTitle;
+
 - (void)dismissOnboardingViewControllerAnimated:(BOOL)animated completion:(nullable KSTVoidBlock)completion;
 
 - (void)gotoNextOnboardingItemAnimated:(BOOL)animated;
