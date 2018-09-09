@@ -50,6 +50,9 @@
 		07A43D8B2143555C0015F9ED /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07A43D892143555C0015F9ED /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07FD4C1C21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FD4C1A21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07FD4C1D21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FD4C1B21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m */; };
+		07FD4C2021449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FD4C1E21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07FD4C2121449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FD4C1F21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.m */; };
+		07FD4C252144A24C006D8A49 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07FD4C232144A24C006D8A49 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +129,9 @@
 		07A43D892143555C0015F9ED /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FD4C1A21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KSOOnboardingExtensions.h"; sourceTree = "<group>"; };
 		07FD4C1B21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KSOOnboardingExtensions.m"; sourceTree = "<group>"; };
+		07FD4C1E21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOOnboardingPrivateExtensions.h"; sourceTree = "<group>"; };
+		07FD4C1F21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOOnboardingPrivateExtensions.m"; sourceTree = "<group>"; };
+		07FD4C242144A24C006D8A49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +197,7 @@
 			children = (
 				07A43D0C2141BA280015F9ED /* Info.plist */,
 				07A43D122141BA930015F9ED /* KSOOnboarding-Info.h */,
+				07FD4C232144A24C006D8A49 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -259,6 +266,8 @@
 				07A43D5B21421C3F0015F9ED /* KSOOnboardingViewModel.m */,
 				07A43D5E2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.h */,
 				07A43D5F2142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m */,
+				07FD4C1E21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.h */,
+				07FD4C1F21449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -280,6 +289,7 @@
 				07A43D752142F31C0015F9ED /* KSOOnboardingMovieBackgroundView.h in Headers */,
 				07A43D5C21421C3F0015F9ED /* KSOOnboardingViewModel.h in Headers */,
 				07A43D7121425F780015F9ED /* KSOOnboardingImageBackgroundView.h in Headers */,
+				07FD4C2021449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +300,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07A43D0E2141BA280015F9ED /* Build configuration list for PBXNativeTarget "KSOOnboarding-iOS" */;
 			buildPhases = (
+				07FD4C222144A16B006D8A49 /* genstrings */,
 				07A43D032141BA280015F9ED /* Sources */,
 				07A43D042141BA280015F9ED /* Frameworks */,
 				07A43D052141BA280015F9ED /* Headers */,
@@ -366,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FD4C252144A24C006D8A49 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +409,20 @@
 			shellPath = /bin/sh;
 			shellScript = scripts/./increment_build_number.sh;
 		};
+		07FD4C222144A16B006D8A49 /* genstrings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = genstrings;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = scripts/./genstrings.sh;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -411,6 +437,7 @@
 				07A43D612142284E0015F9ED /* KSOOnboardingDefaultItemViewController.m in Sources */,
 				07FD4C1D21446C4B006D8A49 /* UIViewController+KSOOnboardingExtensions.m in Sources */,
 				07A43D7C214303F20015F9ED /* KSOOnboardingTheme.m in Sources */,
+				07FD4C2121449F92006D8A49 /* NSBundle+KSOOnboardingPrivateExtensions.m in Sources */,
 				07A43D5821420DD10015F9ED /* KSOOnboardingItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +478,14 @@
 				07A43D2B2141BC570015F9ED /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		07FD4C232144A24C006D8A49 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07FD4C242144A24C006D8A49 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

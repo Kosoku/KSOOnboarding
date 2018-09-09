@@ -1,0 +1,1 @@
+find $SRCROOT/KSOOnboarding/ -name "*.m" | xargs genstrings -o $SRCROOT/KSOOnboarding/en.lproj

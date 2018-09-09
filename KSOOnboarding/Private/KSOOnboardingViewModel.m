@@ -16,6 +16,7 @@
 #import "KSOOnboardingViewModel.h"
 #import "KSOOnboardingDefaultItemViewController.h"
 #import "KSOOnboardingTheme.h"
+#import "NSBundle+KSOOnboardingPrivateExtensions.h"
 
 #import <Stanley/Stanley.h>
 
@@ -107,7 +108,7 @@
 }
 
 + (NSString *)defaultDismissButtonTitle {
-    return @"Dismiss";
+    return NSLocalizedStringWithDefaultValue(@"dismiss.button.title", nil, NSBundle.KSO_onboardingFrameworkBundle, @"Dismiss", @"dismiss button title");
 }
 
 @end
