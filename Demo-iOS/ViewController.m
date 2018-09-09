@@ -21,9 +21,43 @@
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 #import <Stanley/Stanley.h>
 
+typedef NS_ENUM(NSInteger, BackgroundViewType) {
+    BackgroundViewTypeNone = 0,
+    BackgroundViewTypeImage,
+    BackgroundViewTypeMovie
+};
+
+typedef NS_ENUM(NSInteger, BlurEffectStyle) {
+    BlurEffectStyleNone = NSIntegerMin,
+    BlurEffectStyleExtraLight = UIBlurEffectStyleExtraLight,
+    BlurEffectStyleLight = UIBlurEffectStyleLight,
+    BlurEffectStyleDark = UIBlurEffectStyleDark,
+#if (TARGET_OS_TV)
+    BlurEffectStyleExtraDark = UIBlurEffectStyleExtraDark,
+#endif
+    BlurEffectStyleRegular = UIBlurEffectStyleRegular,
+    BlurEffectStyleProminent = UIBlurEffectStyleProminent
+};
+
 static CGSize const kImageSize = {.width=128, .height=128};
 
+@interface BackgroundViewTypeRow : NSObject <KDIPickerViewButtonRow>
+@property (assign,nonatomic) BackgroundViewType type;
++ (instancetype)backgroundViewType:(BackgroundViewType)type;
+@end
+
+@interface BlurEffectStyleRow : NSObject <KDIPickerViewButtonRow>
+@property (assign,nonatomic) BlurEffectStyle style;
++ (instancetype)blurEffectStyle:(BlurEffectStyle)style;
+@end
+
 @interface ViewController () <KSOOnboardingViewControllerDataSource, KSOOnboardingViewControllerDelegate>
+@property (weak,nonatomic) IBOutlet KDIPickerViewButton *backgroundViewPickerViewButton;
+@property (weak,nonatomic) IBOutlet KDIPickerViewButton *blurEffectPickerViewButton;
+
+@property (assign,nonatomic) BackgroundViewType selectedBackgroundViewType;
+@property (assign,nonatomic) BlurEffectStyle selectedBlurEffectStyle;
+
 @property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
 @property (weak,nonatomic) KSOOnboardingViewController *onboardingViewController;
 @end
@@ -33,6 +67,20 @@ static CGSize const kImageSize = {.width=128, .height=128};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.selectedBackgroundViewType = BackgroundViewTypeNone;
+    self.selectedBlurEffectStyle = BlurEffectStyleNone;
+    
+    [self.backgroundViewPickerViewButton KDI_setPickerViewButtonRows:@[[BackgroundViewTypeRow backgroundViewType:BackgroundViewTypeNone], [BackgroundViewTypeRow backgroundViewType:BackgroundViewTypeImage], [BackgroundViewTypeRow backgroundViewType:BackgroundViewTypeMovie]] titleForSelectedRowBlock:^NSString *(id<KDIPickerViewButtonRow>  _Nonnull row) {
+        return [NSString stringWithFormat:@"Background View Type: %@",row.pickerViewButtonRowTitle];
+    } didSelectRowBlock:^(BackgroundViewTypeRow * _Nonnull row) {
+        self.selectedBackgroundViewType = row.type;
+    }];
+    
+    [self.blurEffectPickerViewButton KDI_setPickerViewButtonRows:@[[BlurEffectStyleRow blurEffectStyle:BlurEffectStyleNone], [BlurEffectStyleRow blurEffectStyle:BlurEffectStyleLight], [BlurEffectStyleRow blurEffectStyle:BlurEffectStyleExtraLight], [BlurEffectStyleRow blurEffectStyle:BlurEffectStyleDark], [BlurEffectStyleRow blurEffectStyle:BlurEffectStyleRegular], [BlurEffectStyleRow blurEffectStyle:BlurEffectStyleProminent]] titleForSelectedRowBlock:^NSString *(id<KDIPickerViewButtonRow>  _Nonnull row) {
+        return [NSString stringWithFormat:@"Blur Effect Style: %@",row.pickerViewButtonRowTitle];
+    } didSelectRowBlock:^(BlurEffectStyleRow * _Nonnull row) {
+        self.selectedBlurEffectStyle = row.style;
+    }];
 }
 
 - (NSInteger)numberOfOnboardingItemsForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
@@ -43,12 +91,38 @@ static CGSize const kImageSize = {.width=128, .height=128};
 }
 
 - (UIView *)backgroundViewForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
-    KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
+    id retval = nil;
     
-    backgroundView.blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-    backgroundView.muted = YES;
+    switch (self.selectedBackgroundViewType) {
+        case BackgroundViewTypeNone:
+            break;
+        case BackgroundViewTypeMovie: {
+            KSOOnboardingMovieBackgroundView *backgroundView = [[KSOOnboardingMovieBackgroundView alloc] initWithAsset:[AVAsset assetWithURL:[NSBundle.mainBundle URLForResource:@"movie" withExtension:@"mp4"]]];
+            
+            backgroundView.muted = YES;
+            
+            retval = backgroundView;
+        }
+            break;
+        case BackgroundViewTypeImage: {
+            KSOOnboardingImageBackgroundView *backgroundView = [[KSOOnboardingImageBackgroundView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+            
+            retval = backgroundView;
+        }
+            break;
+    }
     
-    return backgroundView;
+    if ([retval respondsToSelector:@selector(setBlurEffect:)]) {
+        switch (self.selectedBlurEffectStyle) {
+            case BlurEffectStyleNone:
+                break;
+            default:
+                [retval setBlurEffect:[UIBlurEffect effectWithStyle:(UIBlurEffectStyle)self.selectedBlurEffectStyle]];
+                break;
+        }
+    }
+    
+    return retval;
 }
 
 - (IBAction)_buttonAction:(id)sender {
@@ -89,4 +163,54 @@ static CGSize const kImageSize = {.width=128, .height=128};
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+@end
+
+@implementation BackgroundViewTypeRow
++ (instancetype)backgroundViewType:(BackgroundViewType)type {
+    BackgroundViewTypeRow *retval = [[BackgroundViewTypeRow alloc] init];
+    
+    retval.type = type;
+    
+    return retval;
+}
+- (NSString *)pickerViewButtonRowTitle {
+    switch (self.type) {
+        case BackgroundViewTypeNone:
+            return @"None";
+        case BackgroundViewTypeImage:
+            return @"Image";
+        case BackgroundViewTypeMovie:
+            return @"Movie";
+    }
+}
+@end
+
+@implementation BlurEffectStyleRow
++ (instancetype)blurEffectStyle:(BlurEffectStyle)style; {
+    BlurEffectStyleRow *retval = [[BlurEffectStyleRow alloc] init];
+    
+    retval.style = style;
+    
+    return retval;
+}
+- (NSString *)pickerViewButtonRowTitle {
+    switch (self.style) {
+        case BlurEffectStyleDark:
+            return @"Dark";
+        case BlurEffectStyleNone:
+            return @"None";
+        case BlurEffectStyleLight:
+            return @"Light";
+        case BlurEffectStyleRegular:
+            return @"Regular";
+        case BlurEffectStyleProminent:
+            return @"Prominent";
+        case BlurEffectStyleExtraLight:
+            return @"Extra Light";
+#if (TARGET_OS_TV)
+        case BlurEffectStyleExtraDark:
+            return @"Extra Dark";
+#endif
+    }
+}
 @end
