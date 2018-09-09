@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.author       = { "William Towe" => "willbur1984@gmail.com" }
   s.source       = { :git => "https://github.com/Kosoku/KSOOnboarding.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, "11.0"}
+  s.ios.deployment_target = '11.0'
 
   s.requires_arc = true
 
