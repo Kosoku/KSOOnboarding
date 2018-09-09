@@ -17,6 +17,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ KSOOnboardingTheme controls the appearance of the default onboarding views and can be referenced by custom views and view controllers provided by the client.
+ */
 @interface KSOOnboardingTheme : NSObject <NSCopying>
 
 /**
@@ -29,19 +32,74 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly,copy,nonatomic) NSString *identifier;
 
+/**
+ Set and get the image color used to tint the image of a KSOOnboardingItem.
+ 
+ The default is UIColor.blackColor. Set to nil to use the default tint color.
+ */
 @property (strong,nonatomic,nullable) UIColor *imageColor;
+/**
+ Set and get the headline color for the headline text of a KSOOnboardingItem.
+ 
+ The default is UIColor.blackColor.
+ */
 @property (strong,nonatomic,null_resettable) UIColor *headlineColor;
+/**
+ Set and get the body color for the body text of a KSOOnboardingItem.
+ 
+ The default is KDIColorW(0.1).
+ */
 @property (strong,nonatomic,null_resettable) UIColor *bodyColor;
+/**
+ Set and get the action color for the action text of a KSOOnboardingItem.
+ 
+ The default is nil, which means use the default tint color.
+ */
 @property (strong,nonatomic,nullable) UIColor *actionColor;
 
+/**
+ Set and get the headline font for headline text of a KSOOnboardingItem.
+ 
+ The default is [UIFont boldSystemFontOfSize:17.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *headlineFont;
+/**
+ Set and get the body font for body text of a KSOOnboardingItem.
+ 
+ The default is [UIFont systemFontOfSize:17.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *bodyFont;
+/**
+ Set and get the action font for the action text of a KSOOnboardingItem.
+ 
+ The default is [UIFont systemFontOfSize:15.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *actionFont;
 
+/**
+ Set and get the headline text style for the headline text of a KSOOnboardingItem. Setting this to non-nil is required to take advantage of dynamic type support.
+ 
+ The default is UIFontTextStyleHeadline.
+ */
 @property (copy,nonatomic,nullable) UIFontTextStyle headlineTextStyle;
+/**
+ Set and get the body text style for the body text of a KSOOnboardingItem. Setting this to non-nil is required to take advantage of dynamic type support.
+ 
+ The default is UIFontTextStyleBody.
+ */
 @property (copy,nonatomic,nullable) UIFontTextStyle bodyTextStyle;
+/**
+ Set and get the action text style for the action text of a KSOOnboardingItem. Setting this to non-nil is required to take advantage of dynamic type support.
+ 
+ The default is UIFontTextStyleCallout.
+ */
 @property (copy,nonatomic,nullable) UIFontTextStyle actionTextStyle;
 
+/**
+ Set and get the vertical spacing between item subviews (e.g. image, headline, body).
+ 
+ The default is 8.0.
+ */
 @property (assign,nonatomic) CGFloat itemSubviewVerticalSpacing;
 
 /**

@@ -18,12 +18,36 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ KSOOnboardingMovieBackgroundView manages an AVAsset and plays its video on a continuous loop. It can apply a blur and/or a overlay color on top the video content.
+ */
 @interface KSOOnboardingMovieBackgroundView : UIView
 
+/**
+ Set and get the blur effect applied to the video.
+ 
+ The default is nil.
+ */
 @property (strong,nonatomic,nullable) UIBlurEffect *blurEffect;
+/**
+ Set and get the overlay color layered on top the video and blur, if set.
+ 
+ The default is nil.
+ */
 @property (strong,nonatomic,nullable) UIColor *overlayColor;
+/**
+ Set and get whether the video content is muted.
+ 
+ The default is NO.
+ */
 @property (assign,nonatomic,getter=isMuted) BOOL muted;
 
+/**
+ Create and return an instance with the provided video asset.
+ 
+ @param asset The video asset to display
+ @return The initialized instance
+ */
 - (instancetype)initWithAsset:(AVAsset *)asset NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;

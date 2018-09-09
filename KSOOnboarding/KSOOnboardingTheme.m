@@ -79,7 +79,7 @@
     _bodyTextStyle = UIFontTextStyleBody;
     _actionTextStyle = UIFontTextStyleCallout;
     
-    _itemSubviewVerticalSpacing = 20.0;
+    _itemSubviewVerticalSpacing = 8.0;
     
     return self;
 }

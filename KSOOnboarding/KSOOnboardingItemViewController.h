@@ -18,9 +18,22 @@
 
 @class KSOOnboardingTheme;
 
+/**
+ Protocol for an onboarding item view controller. A conforming instance is responsible for a single screen within a KSOOnboardingViewController.
+ */
 @protocol KSOOnboardingItemViewController <NSObject>
 @required
+/**
+ Set and get the KSOOnboardingItem that the conforming instance represents.
+ 
+ @see KSOOnboardingItem
+ */
 @property (strong,nonatomic) __kindof KSOOnboardingItem *onboardingItem;
 @optional
+/**
+ Set and get the KSOOnboardingTheme that the conforming instance can use to control its appearance.
+ 
+ @see KSOOnboardingTheme
+ */
 @property (strong,nonatomic) KSOOnboardingTheme *onboardingTheme;
 @end

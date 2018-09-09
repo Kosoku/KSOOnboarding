@@ -17,11 +17,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ KSOOnboardingImageBackgroundView manages an image and provides methods to blur and/or overlay a color on top the image. It is intended to be returned from the backgroundViewForOnboardingViewController: delegate method.
+ */
 @interface KSOOnboardingImageBackgroundView : UIView
 
+/**
+ Set and get the blur effect applied to the image.
+ 
+ The default is nil.
+ */
 @property (strong,nonatomic,nullable) UIBlurEffect *blurEffect;
+/**
+ Set and get the overlay color layered on top the image and blur, if set.
+ 
+ The default is nil.
+ */
 @property (strong,nonatomic,nullable) UIColor *overlayColor;
 
+/**
+ Create and return an instance with the provided image.
+ 
+ @param image The image to display
+ @return The initialized instance
+ */
 - (instancetype)initWithImage:(UIImage *)image NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;

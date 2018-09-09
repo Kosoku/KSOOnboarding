@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (KSOOnboardingExtensions)
 
+/**
+ Return the onboarding view controller managing the receiver, or nil if there isn't one.
+ */
 @property (readonly,nonatomic,nullable) KSOOnboardingViewController *KSO_onboardingViewController;
 
 @end
