@@ -16,6 +16,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAsset.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface KSOOnboardingMovieBackgroundView : UIView
 
 @property (strong,nonatomic,nullable) UIBlurEffect *blurEffect;
@@ -28,3 +30,5 @@
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END
