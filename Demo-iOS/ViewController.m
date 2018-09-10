@@ -20,6 +20,7 @@
 #import <Ditko/Ditko.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 #import <Stanley/Stanley.h>
+#import <KSOColorPicker/KSOColorPicker.h>
 
 typedef NS_ENUM(NSInteger, BackgroundViewType) {
     BackgroundViewTypeNone = 0,
@@ -54,8 +55,10 @@ static CGSize const kImageSize = {.width=128, .height=128};
 @interface ViewController () <KSOOnboardingViewControllerDataSource, KSOOnboardingViewControllerDelegate>
 @property (weak,nonatomic) IBOutlet KDIPickerViewButton *backgroundViewPickerViewButton;
 @property (weak,nonatomic) IBOutlet KDIPickerViewButton *blurEffectPickerViewButton;
+@property (weak,nonatomic) IBOutlet UIButton *overlayColorButton;
 
 @property (assign,nonatomic) BackgroundViewType selectedBackgroundViewType;
+@property (strong,nonatomic) UIColor *selectedOverlayColor;
 @property (assign,nonatomic) BlurEffectStyle selectedBlurEffectStyle;
 
 @property (copy,nonatomic) NSArray<KSOOnboardingItem *> *onboardingItems;
@@ -66,6 +69,10 @@ static CGSize const kImageSize = {.width=128, .height=128};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    kstWeakify(self);
+    
+    self.title = @"KSOOnboarding";
     
     self.selectedBackgroundViewType = BackgroundViewTypeNone;
     self.selectedBlurEffectStyle = BlurEffectStyleNone;
@@ -81,6 +88,18 @@ static CGSize const kImageSize = {.width=128, .height=128};
     } didSelectRowBlock:^(BlurEffectStyleRow * _Nonnull row) {
         self.selectedBlurEffectStyle = row.style;
     }];
+    
+    [self.overlayColorButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        [self KSO_presentColorPickerViewController:[[KSOColorPickerViewController alloc] initWithColorPickerView:nil] animated:YES completion:^(UIColor * _Nullable color) {
+            self.selectedOverlayColor = color;
+        }];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem KDI_barButtonItemWithTitle:@"Onboard" style:UIBarButtonItemStylePlain block:^(__kindof UIBarButtonItem * _Nonnull barButtonItem) {
+        kstStrongify(self);
+        [self _buttonAction:nil];
+    }]];
 }
 
 - (NSInteger)numberOfOnboardingItemsForOnboardingViewController:(__kindof KSOOnboardingViewController *)viewController {
@@ -120,6 +139,9 @@ static CGSize const kImageSize = {.width=128, .height=128};
                 [retval setBlurEffect:[UIBlurEffect effectWithStyle:(UIBlurEffectStyle)self.selectedBlurEffectStyle]];
                 break;
         }
+    }
+    if ([retval respondsToSelector:@selector(setOverlayColor:)]) {
+        [retval setOverlayColor:self.selectedOverlayColor];
     }
     
     return retval;
@@ -161,6 +183,29 @@ static CGSize const kImageSize = {.width=128, .height=128};
     self.onboardingViewController = viewController;
     
     [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)setSelectedOverlayColor:(UIColor *)selectedOverlayColor {
+    _selectedOverlayColor = selectedOverlayColor;
+    
+    if (_selectedOverlayColor == nil) {
+        [self.overlayColorButton setImage:nil forState:UIControlStateNormal];
+        [self.overlayColorButton setTitle:@"Overlay Color: None" forState:UIControlStateNormal];
+    }
+    else {
+        CGSize size = CGSizeMake(24, 24);
+        UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+        
+        [_selectedOverlayColor setFill];
+        UIRectFill(CGRectMake(0, 0, size.width, size.height));
+        
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext().KDI_originalImage;
+        
+        UIGraphicsEndImageContext();
+        
+        [self.overlayColorButton setImage:image forState:UIControlStateNormal];
+        [self.overlayColorButton setTitle:@"Overlay Color" forState:UIControlStateNormal];
+    }
 }
 
 @end
