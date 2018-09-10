@@ -85,6 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		073813572147013E00D9C515 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07A43D082141BA280015F9ED /* KSOOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D0B2141BA280015F9ED /* KSOOnboarding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboarding.h; sourceTree = "<group>"; };
 		07A43D0C2141BA280015F9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -360,6 +361,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 07A43CFC2141B9820015F9ED;
 			productRefGroup = 07A43D092141BA280015F9ED /* Products */;
@@ -484,6 +486,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				07FD4C242144A24C006D8A49 /* en */,
+				073813572147013E00D9C515 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -494,12 +497,14 @@
 		07A43D012141B9820015F9ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 			};
 			name = Debug;
 		};
 		07A43D022141B9820015F9ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 			};
 			name = Release;
 		};
