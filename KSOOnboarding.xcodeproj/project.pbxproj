@@ -86,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		073813572147013E00D9C515 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		073813582147016000D9C515 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		07A43D082141BA280015F9ED /* KSOOnboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOOnboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A43D0B2141BA280015F9ED /* KSOOnboarding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOOnboarding.h; sourceTree = "<group>"; };
 		07A43D0C2141BA280015F9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -362,6 +363,7 @@
 				en,
 				Base,
 				ja,
+				ro,
 			);
 			mainGroup = 07A43CFC2141B9820015F9ED;
 			productRefGroup = 07A43D092141BA280015F9ED /* Products */;
@@ -487,6 +489,7 @@
 			children = (
 				07FD4C242144A24C006D8A49 /* en */,
 				073813572147013E00D9C515 /* ja */,
+				073813582147016000D9C515 /* ro */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
