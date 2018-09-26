@@ -663,7 +663,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksoonboarding;
 				PRODUCT_NAME = KSOOnboarding;
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
