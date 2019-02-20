@@ -9,14 +9,14 @@
 Pod::Spec.new do |s|
 
   s.name         = "KSOOnboarding"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "KSOOnboarding is an iOS framework for on-boarding new users."
   s.description  = <<-DESC
   KSOOnboarding is an iOS framework for on-boarding new users. It can display a background image or video and provides flexible layout options. Each view consists of optional image, headline text, body text, and action text.
                    DESC
                    
   s.homepage     = "https://github.com/Kosoku/KSOOnboarding"
-  s.license      = { :type => "BSD", :file => "LICENSE.txt" }
+  s.license      = { :type => "Apache 2.0", :file => "LICENSE.txt" }
   s.author       = { "William Towe" => "willbur1984@gmail.com" }
   s.source       = { :git => "https://github.com/Kosoku/KSOOnboarding.git", :tag => s.version.to_s }
 

@@ -20,6 +20,6 @@
 #ifndef KSOOnboarding_Info_h
 #define KSOOnboarding_Info_h
 
-#define KSO_BUNDLE_SHORT_VERSION_STRING 0.1.0
+#define KSO_BUNDLE_SHORT_VERSION_STRING 0.1.1
 
 #endif
